@@ -1,0 +1,24 @@
+.comics_main_header {
+  background-color: black;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 50px;
+  padding-right: 25px;
+
+  &_container {
+    display: flex;
+    align-items: center;
+  }
+
+  &_text {
+    padding-left: 50px;
+    font-weight: 700;
+    font-size: 24px;
+    color: #fff;
+  }
+
+  &_text > p:last-child {
+    margin-top: 10px;
+  }
+}

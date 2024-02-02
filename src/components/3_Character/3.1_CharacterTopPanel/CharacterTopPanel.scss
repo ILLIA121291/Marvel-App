@@ -1,0 +1,71 @@
+@import '../../0_General/variables.scss';
+
+.character_top_panel {
+  max-width: $max-width;
+  height: 220px;
+  display: flex;
+  margin: 0px auto;
+  box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.25);
+
+
+  &_character {
+    max-width: 550px;
+    padding: 20px;
+
+    display: flex;
+    gap: 30px;
+
+
+    div {
+      h2 {
+        font-weight: 600;
+      }
+
+      p {
+        margin-top: 13px;
+      }
+
+      .character_btn {
+        margin-top: 15px;
+        display: flex;
+        gap: 30px;
+      }
+    }
+  }
+
+  &_random {
+    max-width: 585px;
+    width: 100%;
+    padding: 40px 0px 35px 40px;
+    background-color: #090909;
+    position: relative;
+    
+
+    &_mjolnir{
+      position: absolute;
+      top: 15px;
+      right: -30px;
+    }
+
+    &_shield{
+      position: absolute;
+      top: 100px;
+      right: 80px;
+    }
+
+    &_text_block {
+      color: aliceblue;
+
+      p {
+        font-size: 24px;
+        font-weight: 900;
+      }
+
+      p:nth-child(3) {
+        margin-top: 25px;
+        margin-bottom: 20px;
+      }
+    }
+
+  }
+}

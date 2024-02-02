@@ -1,0 +1,45 @@
+.character_info_card {
+
+  &_image {
+    display: flex;
+    gap: 25px;
+
+    div {
+      h3 {
+        font-weight: 700;
+        font-size: 22px;
+        color: #000;
+        margin-top: 5px;
+        margin-bottom: 42px;
+      }
+      button:last-child {
+        margin-top: 10px;
+      }
+    }
+  }
+
+  &_text {
+    margin-top: 15px;
+    font-weight: 400;
+    font-size: 14px;
+    color: #000;
+  }
+
+  h4 {
+    margin-top: 10px;
+    font-weight: 700;
+    font-size: 18px;
+    color: #000;
+  }
+
+  &_comics_list {
+
+    &_li{
+      margin-top: 20px;
+      font-weight: 400;
+      font-size: 14px;
+      color: #000;
+      box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25);
+    }
+  }
+}

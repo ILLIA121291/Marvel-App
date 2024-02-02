@@ -1,0 +1,17 @@
+@import '../0_General/variables.scss';
+
+.character_main {
+  max-width: $max-width;
+  margin: 50px auto 0px;
+  display: flex;
+  justify-content: space-between;
+
+  position: relative; 
+
+  &_background_img{
+    position: absolute;
+    right: -150px;
+    bottom: 0px;
+    z-index: -1;
+  }
+}

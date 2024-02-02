@@ -1,0 +1,22 @@
+@import '../../0_General/variables.scss';
+
+
+.btn-clas {
+  min-width: 100px;
+  padding: 10px 20px;
+  color: #fff;
+  clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 14%);
+  transition: transform .3s;
+}
+
+.btn-clas:hover {
+  transform: scale(1.1);
+}
+
+.btn-red {
+  background-color: $main-color;
+}
+
+.btn-grey {
+  background-color: $grey;
+}
