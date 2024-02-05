@@ -2,27 +2,45 @@
 
 .character_top_panel {
   max-width: $max-width;
-  height: 220px;
+  height: 240px;
   display: flex;
   margin: 0px auto;
   box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.25);
 
-
   &_character {
-    max-width: 550px;
+    width: 550px;
+    height: 200px;
     padding: 20px;
+    
 
     display: flex;
     gap: 30px;
 
+    &_image {
+      width: 180px;
+      height: 180px;
 
-    div {
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &_description {
+      width: 300px;
+
       h2 {
+        height: 16px;
         font-weight: 600;
       }
 
       p {
         margin-top: 13px;
+        height: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: wrap;
       }
 
       .character_btn {
@@ -39,15 +57,14 @@
     padding: 40px 0px 35px 40px;
     background-color: #090909;
     position: relative;
-    
 
-    &_mjolnir{
+    &_mjolnir {
       position: absolute;
       top: 15px;
       right: -30px;
     }
 
-    &_shield{
+    &_shield {
       position: absolute;
       top: 100px;
       right: 80px;
@@ -66,6 +83,5 @@
         margin-bottom: 20px;
       }
     }
-
   }
 }
