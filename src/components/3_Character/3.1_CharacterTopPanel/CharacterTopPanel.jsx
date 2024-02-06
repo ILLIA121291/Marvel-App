@@ -7,16 +7,16 @@ import LoadingAnimation from '../../0_General/LoadingAnimation/LoadingAnimation'
 import ErrorMessage from '../../0_General/ErrorMessage/ErrorMessage';
 
 class CharacterTopPanel extends Component {
-  constructor(props) {
-    super(props);
-    this.updataChar();
-  }
 
   state = {
     char: {},
     loading: true,
     error: false,
   };
+
+  componentDidMount() {
+    this.updataChar();
+  }
 
   marvleService = new MarvelService();
 
@@ -33,12 +33,15 @@ class CharacterTopPanel extends Component {
   };
 
 
-
   onError = () => {
     this.setState({
       loading: false,
       error: true,
     })
+  }
+
+  onTryIt = () => {
+    this.updataChar()
   }
 
   render() {
@@ -62,7 +65,7 @@ class CharacterTopPanel extends Component {
             <p>Random character for today!</p>
             <p>Do you want to get to know him better?</p>
             <p>Or choose another one</p>
-            <Button titel="TRY IT" className="btn-red" />
+            <Button titel="TRY IT" className="btn-red" onClick={this.onTryIt} />
           </div>
         </div>
       </section>

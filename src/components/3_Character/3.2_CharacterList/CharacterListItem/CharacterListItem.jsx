@@ -1,10 +1,12 @@
 import './CharacterListItem.scss';
 
-const CharacterListItem = () => {
+const CharacterListItem = ({name, thumbnail}) => {
   return (
     <div className='character_list_item'>
-      <img src="/CharacterListItem/abc.svg" alt="" />
-      <p>ABYSS</p>
+      <div className='character_list_item_container_img'>
+      <img src={thumbnail} alt="Character image" />
+      </div>
+      <p>{name}</p>
     </div>
   )
 }

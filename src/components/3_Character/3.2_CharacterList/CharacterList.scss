@@ -3,16 +3,21 @@
   max-width: 665px;
   width: 100%;
   margin: 0px;
+  display: flex;
+  flex-direction: column;
 
   &_list{
+    flex-grow: 1;
     display: flex;
     gap: 30px;
     flex-wrap: wrap;
+
   }
 
   &_add {
     margin: 50px 0px 20px;
     display: flex;
     justify-content: center;
+
   }
 }
