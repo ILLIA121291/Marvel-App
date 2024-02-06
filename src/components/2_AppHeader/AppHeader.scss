@@ -3,6 +3,7 @@
 .app {
     &__header {
         max-width: $max-width;
+        width: 100%;
         display: flex;
         justify-content: space-between;
         margin: 20px auto 30px;

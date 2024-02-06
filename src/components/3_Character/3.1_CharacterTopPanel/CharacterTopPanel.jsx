@@ -84,7 +84,7 @@ const RandomCharacter = ({ char }) => {
   return (
     <>
       <div className="character_top_panel_character_image">
-        <img src={thumbnail} alt="Random Character" />
+        <img src={thumbnail} alt={name} />
       </div>
       <div className="character_top_panel_character_description">
         <h2>{name}</h2>

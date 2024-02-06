@@ -1,20 +1,37 @@
 .character_info_card {
-
   &_image {
     display: flex;
     gap: 25px;
 
+    img {
+      width: 150px;
+      height: 150px;
+      object-fit: fill;
+    }
+
     div {
+      display: flex;
+      flex-direction: column;
       h3 {
+        display: block;
+        width: 180px;
+        flex-grow: 1;
         font-weight: 700;
-        font-size: 22px;
-        color: #000;
+        font-size: 18px;
         margin-top: 5px;
-        margin-bottom: 42px;
       }
-      button:last-child {
-        margin-top: 10px;
+
+      div {
+        max-width: 150px;
+        a {
+          display: block;
+        }
+  
+        a:last-child {
+          margin-top: 10px;
+        }
       }
+
     }
   }
 
@@ -33,11 +50,11 @@
   }
 
   &_comics_list {
-
-    &_li{
+    &_li {
       margin-top: 20px;
       font-weight: 400;
-      font-size: 14px;
+      font-size: 16px;
+      line-height: 150%;
       color: #000;
       box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25);
     }

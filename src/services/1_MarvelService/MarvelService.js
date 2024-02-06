@@ -35,6 +35,7 @@ class MarvelService {
       thumbnail: char.thumbnail.path + '.' + char.thumbnail.extension,
       homepage:char.urls[0].url,
       wiki: char.urls[1].url,
+      comics:char.comics.items,
     };
   };
 
@@ -42,6 +43,8 @@ class MarvelService {
     const getResAll = await this.getResource(`${this.__apiBase}characters?limit=99&offset=210&${this.__apiKey}`);
     return getResAll.data.results.map(this._transformOneCharacter);
   };
+
+
 
 
 }

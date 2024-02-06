@@ -1,5 +1,4 @@
 import './CharacterList.scss';
-import CharacterListItem from './CharacterListItem/CharacterListItem';
 import Button from '../../0_General/Button/Button'
 import { Component } from 'react';
 import MarvelService from '../../../services/1_MarvelService/MarvelService';
@@ -7,6 +6,7 @@ import LoadingAnimation from '../../0_General/LoadingAnimation/LoadingAnimation'
 import ErrorMessage from '../../0_General/ErrorMessage/ErrorMessage';
 
 class CharacterList extends Component {
+
 
   state = {
     charList: [],
@@ -42,16 +42,21 @@ class CharacterList extends Component {
   }
 
 
+
+
   render() {
       const {charList, qtyDisplay, loading, error } = this.state
-      const elemntDisplay = charList.slice(0, qtyDisplay)
-
-      const elementsList = elemntDisplay.map(value => {
-        const {id, ...elemProps} = {...value}
-        return <CharacterListItem 
-        key={id}
-        {...value}
-        />
+      
+      const elementsList = charList.slice(0, qtyDisplay).map(value => {
+        
+        return (
+          <div key={value.id} className='character_list_item' onClick={ () => this.props.onCharSelected(value.id)}>
+          <div className='character_list_item_container_img'>
+          <img src={value.thumbnail} alt={value.name} />
+          </div>
+          <p>{value.name}</p>
+        </div>
+        )
       })
 
       const hasLoading = loading ? <LoadingAnimation/> : null;
