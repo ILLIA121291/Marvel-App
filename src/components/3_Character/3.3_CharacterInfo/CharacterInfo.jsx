@@ -5,6 +5,7 @@ import { Component } from 'react';
 import MarvelService from '../../../services/1_MarvelService/MarvelService';
 import LoadingAnimation from '../../0_General/LoadingAnimation/LoadingAnimation';
 import ErrorMessage from '../../0_General/ErrorMessage/ErrorMessage';
+import PropTypes from 'prop-types';
 
 class CharacterInfo extends Component {
   state = {
@@ -36,6 +37,7 @@ class CharacterInfo extends Component {
         .catch(this.onError);
   };
 
+
   onLoading = () => {
     this.setState({loading: true})
   }
@@ -61,14 +63,21 @@ class CharacterInfo extends Component {
 
 
     return (
-      <section className="character_info">
+      <section className='contaner_character_info'>
+        <div className="character_info">
         {infoDemo}
         {hasLoading}
         {hasError}
         {displyContent}
+        </div>
+        <img src="/bg_asset.svg" alt="" className='contaner_character_info_background_img'/>
       </section>
     );
   }
+}
+
+CharacterInfo.propTypes = {
+  charId: PropTypes.number
 }
 
 export default CharacterInfo;

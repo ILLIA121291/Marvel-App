@@ -6,13 +6,18 @@
   text-align: center;
   min-width: 100px;
   padding: 10px 20px;
+  font-size: 16px;
   color: #fff;
   clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 14%);
   transition: transform .3s;
 }
 
 .btn-clas:hover {
-  transform: scale(1.1);
+  transform: translateY(-5px)
+}
+
+.btn-red:disabled{
+  background-color: #566461;
 }
 
 .btn-red {

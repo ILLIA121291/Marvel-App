@@ -26,6 +26,7 @@ class CharacterTopPanel extends Component {
         .getOneCharacter(id)
         .then(this.onCharLoaded)
         .catch(this.onError)
+        
   };
 
   onCharLoaded = char => {
@@ -90,10 +91,10 @@ const RandomCharacter = ({ char }) => {
         <h2>{name}</h2>
         <p>{displayDescrip}</p>
         <div className="character_btn">
-          <a href={homepage} className="btn-red btn-clas">
+          <a href={homepage} className="btn-red btn-clas" target='_blank'>
             HOMEPAGE
           </a>
-          <a href={wiki} className="btn-grey btn-clas">
+          <a href={wiki} className="btn-grey btn-clas" target='_blank'>
             WIKI
           </a>
         </div>

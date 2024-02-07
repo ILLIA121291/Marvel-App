@@ -1,3 +1,5 @@
+@import '../../0_General/variables.scss';
+
 
 .character_list {
   max-width: 665px;
@@ -18,7 +20,12 @@
     margin: 50px 0px 20px;
     display: flex;
     justify-content: center;
-
+    p {
+      font-size: 20px;
+      font-weight: 900;
+      color: red;
+      text-decoration: underline;
+    }
   }
 }
 
@@ -51,5 +58,5 @@
 
 .character_list_item:hover {
   transform: translateY(-10px);
-  box-shadow: 0 5px 20px 0 #9f0013;
+  box-shadow: 0 5px 20px 0 $main-color;
 }

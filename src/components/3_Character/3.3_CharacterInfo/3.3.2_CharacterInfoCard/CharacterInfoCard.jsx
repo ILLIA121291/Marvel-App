@@ -33,10 +33,10 @@ const CharacterInfoCard = ({ char }) => {
         <div>
           <h3>{name}</h3>
           <div>
-            <a href={homepage} className="btn-clas btn-red">
+            <a href={homepage} className="btn-clas btn-red" target='_blank'>
               HOMEPAGE
             </a>
-            <a href={wiki} className="btn-clas btn-grey">
+            <a href={wiki} className="btn-clas btn-grey" target='_blank'>
               WIKI
             </a>
           </div>

@@ -7,47 +7,63 @@ import ErrorMessage from '../../0_General/ErrorMessage/ErrorMessage';
 
 class CharacterList extends Component {
 
-
   state = {
     charList: [],
-    qtyDisplay: 9,
     loading: true,
     error: false,
+    newCharLoading: false,
+    charEnded: false,
+    offset: Math.floor(Math.random() * (1 - 1546) + 1546),
   }
-
-
+  
   marvelServer = new MarvelService()
-
+  
   componentDidMount() {
-    this.updateCharacterList()
+    this.onLoadMore(this.state.offset)
   }
 
-  updateCharacterList = () => {
+
+  onLoadMore = (offset) => {
+    this.onCharListLoading(); 
     this.marvelServer
-        .getAllCharacters()
+        .getAllCharacters(offset)
         .then(this.onCharAllLoaded)
         .catch(this.onError)
+}
+
+
+  onCharAllLoaded = (newCharList) => {
+    let ended = false
+    if(newCharList.length < 9) {
+      ended = true
+    }
+
+    
+    this.setState(({offset, charList}) => ({
+      charList: [...charList, ...newCharList ], 
+      loading: false, 
+      newCharLoading: false, 
+      offset: offset + 9,
+      charEnded: ended,
+    }))
   }
 
-  onCharAllLoaded = (charList) => {
-    this.setState({charList, loading: false, })
+  onCharListLoading = () => {
+    this.setState({
+      newCharLoading: true,
+    })
   }
+
 
   onError = () => {
     this.setState ({ loading: false, error: true,})
   }
   
-  onLoadMore = () => {
-    this.setState({qtyDisplay: this.state.qtyDisplay + 9})
-  }
-
-
-
 
   render() {
-      const {charList, qtyDisplay, loading, error } = this.state
+      const {charList, loading, error, newCharLoading, offset, charEnded } = this.state
       
-      const elementsList = charList.slice(0, qtyDisplay).map(value => {
+      const elementsList = charList.map(value => {
         
         return (
           <div key={value.id} className='character_list_item' onClick={ () => this.props.onCharSelected(value.id)}>
@@ -62,6 +78,7 @@ class CharacterList extends Component {
       const hasLoading = loading ? <LoadingAnimation/> : null;
       const hasError = error ? <ErrorMessage/> : null;
       const displyContent = !(hasLoading || hasError) ? elementsList : null;
+      const addButton = charEnded ? <p>Characters are over</p> : <Button titel='LOAD MORE' className='btn-red' onClick={()=>{this.onLoadMore(offset)}} disabele={newCharLoading} />;
 
     return (
       <section className='character_list'>
@@ -71,7 +88,7 @@ class CharacterList extends Component {
         {displyContent}
         </div>
         <div className='character_list_add'>
-          <Button titel='LOAD MORE' className='btn-red' onClick={this.onLoadMore}/>
+        {addButton}
         </div>
       </section>
       )
