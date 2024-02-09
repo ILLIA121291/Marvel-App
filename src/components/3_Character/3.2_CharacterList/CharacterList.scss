@@ -60,3 +60,9 @@
   transform: translateY(-10px);
   box-shadow: 0 5px 20px 0 $main-color;
 }
+
+.character_list_item:focus{
+  border: initial;
+  transform: translateY(-10px);
+  box-shadow: 0 5px 20px 0 $main-color;
+}

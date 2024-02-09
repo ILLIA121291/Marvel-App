@@ -20,7 +20,7 @@ const CharacterInfoCard = ({ char }) => {
     comicsDisplay = comics.slice(0, 10).map((value, i) => {
       return (
         <li key={i} className="character_info_card_comics_list_li">
-          <a href={value.resourceURI}>{value.name}</a>
+          {value.name}
         </li>
       );
     });

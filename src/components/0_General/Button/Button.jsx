@@ -5,7 +5,7 @@ const Button = ({titel, className, onClick, disabele}) => {
   <button
   className={'btn-clas ' + className}
   onClick={onClick}
-  disabled={disabele}
+  disabled={disabele} 
   >{titel}</button>)
 }
 
