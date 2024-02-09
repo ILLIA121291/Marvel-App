@@ -17,30 +17,28 @@ class CharacterInfo extends Component {
   marvleService = new MarvelService();
 
   componentDidMount() {
-    this.updateChar()
+    this.updateChar();
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.charId !== prevProps.charId) {
-      this.updateChar()
+    if (this.props.charId !== prevProps.charId) {
+      this.updateChar();
     }
   }
 
-  updateChar = (props) => {
+  updateChar = props => {
     const { charId } = this.props;
 
-    if (!charId) {return}
+    if (!charId) {
+      return;
+    }
 
-    this.marvleService
-        .getOneCharacter(charId)
-        .then(this.onCharLoaded)
-        .catch(this.onError);
+    this.marvleService.getOneCharacter(charId).then(this.onCharLoaded).catch(this.onError);
   };
 
-
   onLoading = () => {
-    this.setState({loading: true})
-  }
+    this.setState({ loading: true });
+  };
 
   onCharLoaded = char => {
     this.setState({ char, loading: false });
@@ -56,35 +54,27 @@ class CharacterInfo extends Component {
   render() {
     const { char, loading, error } = this.state;
 
-    const infoDemo = char || loading || error ? null : <CharacterInfoDemo/>;
-    const hasLoading = loading ? <LoadingAnimation/> : null;
-    const hasError = error ? <ErrorMessage/> : null;
-    const displyContent = !(loading || error || !char) ? <CharacterInfoCard char={char}/> : null;
-
+    const infoDemo = char || loading || error ? null : <CharacterInfoDemo />;
+    const hasLoading = loading ? <LoadingAnimation /> : null;
+    const hasError = error ? <ErrorMessage /> : null;
+    const displyContent = !(loading || error || !char) ? <CharacterInfoCard char={char} /> : null;
 
     return (
-      <section className='contaner_character_info'>
+      <section className="contaner_character_info">
         <div className="character_info">
-        {infoDemo}
-        {hasLoading}
-        {hasError}
-        {displyContent}
+          {infoDemo}
+          {hasLoading}
+          {hasError}
+          {displyContent}
         </div>
-        <img src="/bg_asset.svg" alt="" className='contaner_character_info_background_img'/>
-
-
-      <img src="/thumbnail.svg" alt="" />
-
-
-
-
+        <img src="/bg_asset.svg" alt="" className="contaner_character_info_background_img" />
       </section>
     );
   }
 }
 
 CharacterInfo.propTypes = {
-  charId: PropTypes.number
-}
+  charId: PropTypes.number,
+};
 
 export default CharacterInfo;
