@@ -71,6 +71,13 @@ class CharacterInfo extends Component {
         {displyContent}
         </div>
         <img src="/bg_asset.svg" alt="" className='contaner_character_info_background_img'/>
+
+
+      <img src="/thumbnail.svg" alt="" />
+
+
+
+
       </section>
     );
   }
