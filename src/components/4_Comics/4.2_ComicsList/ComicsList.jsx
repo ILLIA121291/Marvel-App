@@ -1,23 +1,85 @@
-import ComicsListCard from './4.2.1_ComicsListCard/ComicsListCard';
-import Button from '../../0_General/Button/Button'
+import Button from '../../0_General/Button/Button';
 import './ComicsList.scss';
+import { useState, useEffect } from 'react';
+import useMarvelService from '../../../services/1_MarvelService/MarvelService';
+import LoadingAnimation from '../../0_General/LoadingAnimation/LoadingAnimation';
+import ErrorMessage from '../../0_General/ErrorMessage/ErrorMessage';
 
 const ComicsList = () => {
-  return (
-    <section >
-      <div className='comics_main_comics_list'>
-        <ComicsListCard image='/Comics/img_1.svg'/>
-        <ComicsListCard image='/Comics/img_2.svg'/>
-        <ComicsListCard image='/Comics/img_1.svg'/>
-        <ComicsListCard image='/Comics/img_2.svg'/>
-        <ComicsListCard image='/Comics/img_1.svg'/>
-        <ComicsListCard image='/Comics/img_2.svg'/>
+  const [comicsList, setComicsList] = useState([]);
+  const [newComicsLoading, setNewComicsLoading] = useState(false);
+  const [comicsEnded, setComicsEnded] = useState(false);
+  const [offset, setOffset] = useState(Math.floor(Math.random() * (1 - 1546) + 1546));
+
+  const { loading, error, getAllComics } = useMarvelService();
+
+  useEffect(() => {
+    onLoadMore(offset, true);
+  }, []);
+
+  const onLoadMore = (offset, initial) => {
+    initial ? setNewComicsLoading(false) : setNewComicsLoading(true);
+    getAllComics(offset)
+    .then(onComicsAllLoaded);
+  };
+
+  const onComicsAllLoaded = newComicsList => {
+    let ended = false;
+    if (comicsList.length < 8) {
+      ended = true;
+    }
+
+    setComicsList(comicsList => [...comicsList, ...newComicsList]);
+    setNewComicsLoading(newComicsLoading => false);
+    setOffset(offset => offset + 8);
+    setComicsEnded(comicsEnded => ended);
+  };
+
+  const elementsList = comicsList.map(value => {
+    const { id, title, thumbnail, price } = value;
+
+    return (
+      <div 
+      key={id} 
+      className="comics_list_card"
+      tabIndex="0">
+        <div>
+          <img src={thumbnail} alt="" />
+        </div>
+        <p>{title}</p>
+        <p>{price}$</p>
       </div>
-      <div className='comics_main_comics_list_add'>
-        <Button titel='LOAD MORE' className='btn-red'/>
+    );
+  });
+
+  const hasLoading = loading && !newComicsLoading ? <LoadingAnimation /> : null;
+  const hasError = error ? <ErrorMessage /> : null;
+  const displyContent = !(hasLoading || hasError) ? elementsList : null;
+  const addButton = comicsEnded ? (
+    <p>Comics are over</p>
+  ) : (
+    <Button
+      titel="LOAD MORE"
+      className="btn-red"
+      onClick={() => {
+        onLoadMore(offset);
+      }}
+      disabele={newComicsLoading}
+    />
+  );
+
+  return (
+    <section>
+      <div className="comics_main_comics_list">
+        {hasLoading}
+        {hasError}
+        {displyContent}
+      </div>
+      <div className="comics_main_comics_list_add">
+        {addButton}
       </div>
     </section>
-  )
-} 
+  );
+};
 
-export default ComicsList
+export default ComicsList;

@@ -2,45 +2,26 @@ import { useState, useEffect } from 'react';
 import './CharacterTopPanel.scss';
 
 import Button from '../../0_General/Button/Button';
-import MarvelService from '../../../services/1_MarvelService/MarvelService';
+import useMarvelService from '../../../services/1_MarvelService/MarvelService';
 import LoadingAnimation from '../../0_General/LoadingAnimation/LoadingAnimation';
 import ErrorMessage from '../../0_General/ErrorMessage/ErrorMessage';
 
-
-
 const CharacterTopPanel = () => {
   const [char, setChar] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  const marvleService = new MarvelService();
+  const { loading, error, getOneCharacter, clearError } = useMarvelService();
 
   useEffect(() => {
     updataChar();
   }, []);
 
-
-  const onLoading = () => {
-    setLoading(loading => true);
-  };
-
   const updataChar = () => {
-    onLoading()
+    clearError()
     const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
-    marvleService.getOneCharacter(id)
-    .then(onCharLoaded)
-    .catch(onError);
+    getOneCharacter(id).then(onCharLoaded);
   };
 
   const onCharLoaded = char => {
     setChar(char);
-    setLoading(false);
-  };
-
-
-  const onError = () => {
-    setLoading(loading => false);
-    setError(error => true);
   };
 
   const onTryIt = () => {
@@ -76,8 +57,9 @@ const RandomCharacter = props => {
   const { name, description, thumbnail, homepage, wiki } = props.char;
 
   let displayDescrip = description;
-  if (description.length > 250) {
-    displayDescrip = description.slice(0, 250) + '...';
+
+  if (description) {
+    description.length > 250 ? description.slice(0, 250) + '...' : description;
   }
 
   return (

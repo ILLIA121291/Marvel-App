@@ -1,12 +1,60 @@
+@import '../../0_General/variables.scss';
+
 .comics_main_comics_list {
   margin-top: 50px;
-  display: grid;
-  grid: repeat(2, 1fr) / repeat(4, 1fr);
-  row-gap: 40px;
+  max-width: $max-width;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 60px 70px;
 
-  &_add {
-    display: flex;
-    justify-content: center;
-    padding: 30px 0px 30px;
+}
+
+.comics_main_comics_list_add {
+  display: flex;
+  justify-content: center;
+  padding: 30px 0px 30px;
+}
+
+.comics_list_card {
+  padding: 0px;
+  width: 225px;
+  min-height: 415px;
+  transition: transform .3s, box-shadow .1s;  
+
+  div {
+    width: 220px;
+    height: 346px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
+
+  p:nth-child(2) {
+    margin-top: 10px;
+    font-weight: 900;
+    font-size: 18px;
+  }
+
+  p:nth-child(3) {
+    margin-top: 10px;
+    font-weight: 700;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.comics_list_card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 5px 20px 0 $main-color;
+}
+
+.comics_list_card:focus{
+  border: initial;
+  transform: translateY(-10px);
+  box-shadow: 0 5px 20px 0 $main-color;
 }

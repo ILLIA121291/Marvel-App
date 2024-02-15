@@ -1,32 +1,28 @@
 import './CharacterList.scss';
 import Button from '../../0_General/Button/Button';
 import { useState, useEffect, useRef } from 'react';
-import MarvelService from '../../../services/1_MarvelService/MarvelService';
+import useMarvelService from '../../../services/1_MarvelService/MarvelService';
 import LoadingAnimation from '../../0_General/LoadingAnimation/LoadingAnimation';
 import ErrorMessage from '../../0_General/ErrorMessage/ErrorMessage';
 
 const CharacterList = props => {
   const [charList, setCharList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
   const [newCharLoading, setNewCharLoading] = useState(false);
   const [charEnded, setCharEnded] = useState(false);
   const [offset, setOffset] = useState(Math.floor(Math.random() * (1 - 1546) + 1546));
 
-  const marvelServer = new MarvelService();
+  const {loading, error, getAllCharacters} = useMarvelService();
 
   useEffect(() => {
-    onLoadMore(offset);
+    onLoadMore(offset, true);
   }, []);
 
-  const onLoadMore = offset => {
-    onCharListLoading();
-    marvelServer.getAllCharacters(offset).then(onCharAllLoaded).catch(onError);
+  const onLoadMore = (offset, initial) => {
+    initial ? setNewCharLoading(false) : setNewCharLoading(true) 
+    getAllCharacters(offset)
+    .then(onCharAllLoaded)
   };
 
-  const onCharListLoading = () => {
-    setNewCharLoading(true);
-  };
 
   const onCharAllLoaded = newCharList => {
     let ended = false;
@@ -35,16 +31,11 @@ const CharacterList = props => {
     }
 
     setCharList(charList => [...charList, ...newCharList]);
-    setLoading(loading => false);
     setNewCharLoading(newCharLoading => false);
     setOffset(offset => offset + 9);
     setCharEnded(charEnded => ended);
   };
 
-  const onError = () => {
-    setLoading(loading => false);
-    setError(error => true);
-  };
 
   const onEnterPush = (e, id) => {
     if (e.code == 'Enter' || e.code == 'NumpadEnter') {
@@ -64,7 +55,7 @@ const CharacterList = props => {
     );
   });
 
-  const hasLoading = loading ? <LoadingAnimation /> : null;
+  const hasLoading = loading && !newCharLoading ? <LoadingAnimation /> : null;
   const hasError = error ? <ErrorMessage /> : null;
   const displyContent = !(hasLoading || hasError) ? elementsList : null;
   const addButton = charEnded ? (

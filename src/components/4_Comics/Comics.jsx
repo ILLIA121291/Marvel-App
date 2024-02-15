@@ -7,8 +7,8 @@ const Comics = () => {
   return (
     <section className='comics_main'>
       <ComicsHeader/>
-      {/* <ComicsList/> */}
-      <ComicsDescription/>
+      <ComicsList/>
+      {/* <ComicsDescription/> */}
     </section>
   )
 }

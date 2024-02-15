@@ -1,24 +1,27 @@
-class MarvelService {
-  // __apiBase = 'https://gateway.marvel.com:443/v1/public/';
-  // __apiKey = 'apikey=22c95a59120e95d258164f006e3b8fd6';
+import useHttp from '../../hooks/http.hook.js'
 
 
-  getResource = async url => {
-    let res = await fetch(url);
+const useMarvelService = () => {
 
-    if (!res.ok) {
-      throw new Error(`Could not fetch ${url}, status: ${res.status}`);
-    }
+  const {loading, request, error, clearError} = useHttp()
 
-    return await res.json();
+  // const __apiBase = 'https://gateway.marvel.com:443/v1/public/';
+  // const __apiKey = 'apikey=22c95a59120e95d258164f006e3b8fd6';
+
+
+  const getOneCharacter = async id => {
+    const getRes = await request(`${__apiBase}characters/${id}?${__apiKey}`);
+    return _transformOneCharacter(getRes.data.results[0]);
   };
 
-  getOneCharacter = async id => {
-    const getRes = await this.getResource(`${this.__apiBase}characters/${id}?${this.__apiKey}`);
-    return this._transformOneCharacter(getRes.data.results[0]);
+
+  const getAllCharacters = async (offset) => {
+    const getResAll = await request(`${__apiBase}characters?limit=9&offset=${offset}&${__apiKey}`);
+    return getResAll.data.results.map(_transformOneCharacter);
   };
 
-  _transformOneCharacter = char => {
+
+  const _transformOneCharacter = char => {
     let displayDescription = char.description == '' ? '!!! Unfortunately, this character does not have a description.' : char.description;
 
     return {
@@ -32,10 +35,48 @@ class MarvelService {
     };
   };
 
-  getAllCharacters = async (offset) => {
-    const getResAll = await this.getResource(`${this.__apiBase}characters?limit=9&offset=${offset}&${this.__apiKey}`);
-    return getResAll.data.results.map(this._transformOneCharacter);
+  /*---------------------------------------------------------------------------------------------------------------- */
+  /*---------------------------------------------------------------------------------------------------------------- */
+  /*---------------------------------------------------------------------------------------------------------------- */
+
+
+  
+  
+  // const __apiBase = 'https://gateway.marvel.com:443/v1/public/';
+  // const __apiKey = 'apikey=22c95a59120e95d258164f006e3b8fd6';
+
+
+  const getAllComics = async (offset) => {
+    const getResAll = await request(`${__apiBase}comics?limit=8&offset=${offset}&${__apiKey}`);
+    return getResAll.data.results.map(_transformOneComics);
   };
+
+
+  const _transformOneComics = comics => {
+    let displayDescription = comics.description == '' ? '!!! Unfortunately, this character does not have a description.' : comics.description;
+
+    return {
+      id: comics.id,
+      title: comics.title,
+      description: displayDescription,
+      price: comics.prices[0].price,
+      thumbnail: comics.thumbnail.path + '.' + comics.thumbnail.extension,
+    };
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+  return {loading, error, clearError, getOneCharacter, getAllCharacters, getAllComics}
 }
 
-export default MarvelService;
+export default useMarvelService;
