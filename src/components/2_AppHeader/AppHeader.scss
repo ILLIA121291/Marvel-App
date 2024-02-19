@@ -8,10 +8,19 @@
         justify-content: space-between;
         margin: 20px auto 30px;
     }
+
+    h1 {
+        a {
+        display: inline-block;
+        transition: transform .3s;
+    }
+    }
+
     &__title {
         font-weight: bold;
         font-size: 28px;
         line-height: 37px;
+        display: block;
         span {
             color: $main-color;
         }
@@ -26,12 +35,15 @@
             li {
                 margin: 0 8px;
                 a {
-                    transition: color .3s;
+                    transition: transform .3s, color .3s;
+                    display: inline-block       ;
                 }
-                a:hover {
-                    color: $main-color;
-                }
-            }
+            }   
         }
     }
+}
+
+
+.nav-activated {
+color:$main-color;
 }

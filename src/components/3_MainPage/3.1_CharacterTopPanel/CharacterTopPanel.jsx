@@ -71,10 +71,10 @@ const RandomCharacter = props => {
         <h2>{name}</h2>
         <p>{displayDescrip}</p>
         <div className="character_btn">
-          <a href={homepage} className="btn-red btn-clas" target="_blank">
+          <a href={homepage} className="btn-red btn-clas" style={{'color' : 'white'}} target="_blank">
             HOMEPAGE
           </a>
-          <a href={wiki} className="btn-grey btn-clas" target="_blank">
+          <a href={wiki} className="btn-grey btn-clas" style={{'color' : 'white'}} target="_blank">
             WIKI
           </a>
         </div>

@@ -25,15 +25,14 @@ const CharacterList = props => {
 
 
   const onCharAllLoaded = newCharList => {
-    let ended = false;
+
     if (newCharList.length < 9) {
-      ended = true;
+      setCharEnded(charEnded => true);
     }
 
     setCharList(charList => [...charList, ...newCharList]);
     setNewCharLoading(newCharLoading => false);
     setOffset(offset => offset + 9);
-    setCharEnded(charEnded => ended);
   };
 
 
@@ -70,6 +69,8 @@ const CharacterList = props => {
       disabele={newCharLoading}
     />
   );
+
+  console.log('Render Char list')
 
   return (
     <section className="character_list">

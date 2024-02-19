@@ -1,11 +1,11 @@
-import './Character.scss';
+import './MainPage.scss';
 import CharacterTopPanel from './3.1_CharacterTopPanel/CharacterTopPanel';
 import CharacterList from './3.2_CharacterList/CharacterList';
 import CharacterInfo from './3.3_CharacterInfo/CharacterInfo';
 import { useState } from 'react';
 import ErrorBoundary from '../0_General/ErrorBoundary/ErrorBoundary';
 
-const Character = () => {
+const MainPage = () => {
   const [selectChar, setChar] = useState(null);
 
   const onCharSelected = id => {
@@ -29,4 +29,4 @@ const Character = () => {
   );
 };
 
-export default Character;
+export default MainPage;

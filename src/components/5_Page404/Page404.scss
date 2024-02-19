@@ -1,0 +1,32 @@
+@import '../0_General/variables.scss';
+
+.page_not_found {
+  max-width: $max-width;
+  height: 75vh;
+  margin: 0px auto;
+ 
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    color: $main-color;
+    font-size: 40px;
+    font-weight: 900px;
+  }
+
+  a {
+    display: block;
+    color: rgb(57, 118, 230);
+    font-size: 40px;
+    font-weight: 900px;
+    text-decoration: underline;
+  }
+
+  img{
+    width: 500px;
+    margin-top: 30px;
+  }
+}
