@@ -43,7 +43,7 @@ const PageComicsDescription = () => {
         <p className="comics_description_text">{description}</p>
         <p>{`${page} pages`}</p>
         <p>Language: en-us</p>
-        <p>{`${price} $`}</p>
+        <p>{`$${price}`}</p>
       </div>
     </div>
     )

@@ -1,11 +1,15 @@
 import './App.scss';
 import AppHeader from '../2_AppHeader/AappHeader';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 
-import MainPage from '../3_MainPage/MainPage';
-import PageComics from '../4_PageComics/PageComics';
-import Page404 from '../5_Page404/Page404';
-import PageComicsDescription from '../6_PageComicsDescription/PageComicsDescription';
+import LoadingAnimation from '../0_General/LoadingAnimation/LoadingAnimation';
+
+const Page404 = lazy(() => import('../5_Page404/Page404'));
+const MainPage = lazy(() => import('../3_MainPage/3.0_MainPage/MainPage'));
+const PageComics = lazy(() => import('../4_PageComics/PageComics'));
+const  PageComicsDescription = lazy(() => import('../6_PageComicsDescription/PageComicsDescription'));
+
 
 const App = () => {
   return (
@@ -13,12 +17,14 @@ const App = () => {
       <div className="app">
         <AppHeader />
         <main>
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/comics" element={<PageComics />} />
-            <Route path="/comics/:comicsId" element={<PageComicsDescription />} />
-            <Route path="*" element={<Page404 />} />
-          </Routes>
+          <Suspense fallback={<LoadingAnimation/>}>
+            <Routes>
+              <Route path="/" element={<MainPage/>} />
+              <Route path="/comics" element={<PageComics />} />
+              <Route path="/comics/:comicsId" element={<PageComicsDescription />} />
+              <Route path="*" element={<Page404 />} />
+            </Routes>
+          </Suspense>
         </main>
       </div>
     </Router>

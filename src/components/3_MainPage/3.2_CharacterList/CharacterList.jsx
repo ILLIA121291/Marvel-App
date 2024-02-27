@@ -70,10 +70,10 @@ const CharacterList = props => {
     />
   );
 
-  console.log('Render Char list')
+
 
   return (
-    <section className="character_list">
+    <section className="character_list" >
       <div className="character_list_list">
         {hasLoading}
         {hasError}

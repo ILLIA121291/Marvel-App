@@ -1,6 +1,6 @@
-@import './components/0_General/variables.scss'
+@import './components/0_General/variables.scss';
 
-*{padding: 0;margin: 0;border: 0;}
+*{padding: 0; margin: 0; border: 0;}
 *,*:before,*:after{-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}
 :focus,:active{outline: none;}
 a:focus,a:active{outline: none;}
@@ -21,7 +21,14 @@ a{color:inherit;}
 
 
 
-:focus{
+/* :focus{
   transform: translateY(-10px);
-}
+} */
+
+/* * {
+  outline: 1px solid #fa0202;
+} */
+
+
+
 

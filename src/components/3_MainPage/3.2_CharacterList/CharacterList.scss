@@ -4,14 +4,15 @@
 .character_list {
   max-width: 665px;
   width: 100%;
-  margin: 0px;
+  padding-right: 20px;
   display: flex;
   flex-direction: column;
+
 
   &_list{
     flex-grow: 1;
     display: flex;
-    gap: 30px;
+    gap: 20px;
     flex-wrap: wrap;
 
   }
@@ -33,7 +34,7 @@
   width: 200px;
   height: 318px;
   background: #000;
-  border-radius: 5px;
+  border-radius: 10px;
   transition: transform .3s, box-shadow .1s;
   
   &_container_img{
@@ -65,4 +66,18 @@
   border: initial;
   transform: translateY(-10px);
   box-shadow: 0 5px 20px 0 $main-color;
+}
+
+
+@media (max-width: 1140px) {
+  .character_list_list {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width:700px) {
+  .character_list {
+    padding-right: 0px;
+  }
 }
