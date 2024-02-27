@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 
 import LoadingAnimation from '../0_General/LoadingAnimation/LoadingAnimation';
+import PageCharacterDescription from '../7_PageCharacterDescription/PageCharacterDescription';
 
 const Page404 = lazy(() => import('../5_Page404/Page404'));
 const MainPage = lazy(() => import('../3_MainPage/3.0_MainPage/MainPage'));
@@ -20,6 +21,7 @@ const App = () => {
           <Suspense fallback={<LoadingAnimation/>}>
             <Routes>
               <Route path="/" element={<MainPage/>} />
+              <Route path="/:nameChar" element={<PageCharacterDescription/>} />
               <Route path="/comics" element={<PageComics />} />
               <Route path="/comics/:comicsId" element={<PageComicsDescription />} />
               <Route path="*" element={<Page404 />} />

@@ -1,8 +1,9 @@
 import './FindCharacter.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import useMarvelService from '../../../../services/1_MarvelService/MarvelService';
+import { Link } from 'react-router-dom';
 
 const FindCharacter = props => {
   const { loading, error, getOneCharacterByName, clearError } = useMarvelService();
@@ -63,7 +64,7 @@ const FindCharacter = props => {
           <label htmlFor="nameChar">Or find a character by name:</label>
           <br />
           <Field placeholder="Enter name" name="nameChar" type="text"  />
-          <button 
+          <button  
           className="btn-clas btn-red" 
           disabled={disabeleSeaBtn} 
           type="submit"
@@ -83,7 +84,7 @@ const CharWasFind = ({nameChar}) => {
   return (
     <div className='char_was_find'>
       <p className="message_block successful_message">There is! Visit {nameChar} page?</p>
-      <button className="btn-clas btn-grey" type='button'>TO PAGE</button>
+      <Link to={`/${nameChar}`} className="btn-clas btn-grey" type='button'>TO PAGE</Link>
     </div>
   );
 };
