@@ -1,0 +1,60 @@
+.find_character {
+  margin-top: 20px;
+  width: 427px;
+
+  padding: 25px;
+  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+  border-radius: 10px;
+
+  label {
+    font-weight: 700;
+    font-size: 18px;
+    color: #000;
+  }
+
+  input {
+    width: 250px;
+    height: 38px;
+    font-size: 19px;
+    margin-right: 24px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    background: #fff;
+    margin-top: 19px;
+  }
+
+  input::placeholder {
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.5);
+    padding-left: 10px;
+    border-radius: 10px;
+  }
+}
+
+
+
+.message_block {
+  
+  display: block;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.error_message { 
+  color: #9f0013;
+  margin-top: 30px;
+}
+
+.successful_message {
+  color: #03710e;
+  margin-right: 24px;
+  width: 250px;
+}
+
+
+.char_was_find {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+}

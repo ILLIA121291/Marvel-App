@@ -1,0 +1,40 @@
+.contaner_character_info {
+  width: 427px;
+  position: relative;
+
+  &_background_img{
+    position: absolute;
+    right: -150px;
+    bottom: 0px;
+    z-index: -1;
+  }
+}
+
+
+.character_info {
+  width: 427px;
+  min-height: 294px;
+
+  position: sticky;
+  top: 0px;
+  left: 0px;
+}
+
+
+
+@media (max-width: 1450px){
+  .contaner_character_info_background_img {
+    right: 0px;
+  }
+}
+
+@media (max-width:700px){
+  .contaner_character_info_background_img {
+    display: none;
+  }
+
+
+  .contaner_character_info {
+    display: none;
+  }
+}

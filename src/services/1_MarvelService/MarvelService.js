@@ -71,10 +71,14 @@ const useMarvelService = () => {
 
 
 
-
   const getOneCharacterByName = async nameChar => {
     const getRes = await request(`${__apiBase}characters?name=${nameChar}&${__apiKey}`);
-    return _transformOneCharacter(getRes.data.results[0]);
+    
+    if (getRes.data.results.length >= 1) {
+      return _transformOneCharacter(getRes.data.results[0]);
+    } else {
+      return false
+    }
   };
 
 
