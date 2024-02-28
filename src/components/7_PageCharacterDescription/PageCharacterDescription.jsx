@@ -1,9 +1,10 @@
 import useMarvelService from '../../services/1_MarvelService/MarvelService';
 import './PageCharacterDescription.scss';
-import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import LoadingAnimation from '../0_General/LoadingAnimation/LoadingAnimation';
 import Page404 from '../5_Page404/Page404';
+import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const PageCharacterDescription = () => {
   const { nameChar } = useParams();
@@ -16,8 +17,7 @@ const PageCharacterDescription = () => {
   }, [nameChar]);
 
   const onLoadchar = () => {
-    getOneCharacterByName(nameChar)
-    .then(oncharAllLoaded);
+    getOneCharacterByName(nameChar).then(oncharAllLoaded);
   };
 
   const oncharAllLoaded = char => {
@@ -28,15 +28,21 @@ const PageCharacterDescription = () => {
 
   const CharPage = () => {
     return (
-      <div className="char_description">
-        <div className="char_description_img">
-          <img src={thumbnail} alt={name} />
+      <>
+        <Helmet>
+          <meta name="description" content={`${name} description page`} />
+          <title>{`${name} description page`}</title>
+        </Helmet>
+        <div className="char_description">
+          <div className="char_description_img">
+            <img src={thumbnail} alt={name} />
+          </div>
+          <div className="char_description_container">
+            <h2>{name}</h2>
+            <p className="char_description_text">{description}</p>
+          </div>
         </div>
-        <div className="char_description_container">
-          <h2>{name}</h2>
-          <p className="char_description_text">{description}</p>
-        </div>
-      </div>
+      </>
     );
   };
 

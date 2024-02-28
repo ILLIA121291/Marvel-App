@@ -7,39 +7,30 @@ import LoadingAnimation from '../../../0_General/LoadingAnimation/LoadingAnimati
 import ErrorMessage from '../../../0_General/ErrorMessage/ErrorMessage';
 import PropTypes from 'prop-types';
 import FindCharacter from '../3.3.3_FindCharacter/FindCharacter';
+import ErrorBoundary from '../../../0_General/ErrorBoundary/ErrorBoundary';
 
 const CharacterInfo = props => {
   const [char, setChar] = useState(null);
-  const {loading, error, getOneCharacter, getOneCharacterByName, clearError} = useMarvelService();
-  
-  
+  const { loading, error, getOneCharacter, getOneCharacterByName, clearError } = useMarvelService();
+
   useEffect(() => {
     updateChar(props);
   }, [props.charId]);
 
-
   const updateChar = props => {
     const { charId } = props;
-    
+
     if (!charId) {
       return;
     }
-    
-    clearError()
-    getOneCharacter(charId)
-    .then(onCharLoaded)
+
+    clearError();
+    getOneCharacter(charId).then(onCharLoaded);
   };
 
   const onCharLoaded = char => {
     setChar(char);
   };
-
-
-const onSearchChar = char => {
-  setChar(char);
-}
-
-
 
   const infoDemo = char || loading || error ? null : <CharacterInfoDemo />;
   const hasLoading = loading ? <LoadingAnimation /> : null;
@@ -53,7 +44,9 @@ const onSearchChar = char => {
         {hasLoading}
         {hasError}
         {displyContent}
-      <FindCharacter onSearchChar={onSearchChar} />
+        <ErrorBoundary>
+          <FindCharacter />
+        </ErrorBoundary>
       </div>
       <img src="/bg_asset.svg" alt="" className="contaner_character_info_background_img" />
     </section>
