@@ -70,7 +70,7 @@ const CharWasFind = ({ nameChar }) => {
   return (
     <div className="char_was_find">
       <p className="message_block successful_message">There is! Visit {nameChar} page?</p>
-      <Link to={`/${nameChar}`} className="btn-clas btn-grey" type="button">
+      <Link to={`/character/${nameChar}`} className="btn-clas btn-grey" type="button">
         TO PAGE
       </Link>
     </div>

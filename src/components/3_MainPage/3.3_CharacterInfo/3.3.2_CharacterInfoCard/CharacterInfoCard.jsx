@@ -1,7 +1,7 @@
 import './CharacterInfoCard.scss';
 
-const CharacterInfoCard = ({ char }) => {
-  const { name, thumbnail, homepage, wiki, description, comics } = char;
+const CharacterInfoCard = ({ data }) => {
+  const { name, thumbnail, homepage, wiki, description, comics } = data;
 
   let comicsDisplay = null;
 

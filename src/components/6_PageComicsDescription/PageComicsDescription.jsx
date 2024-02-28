@@ -2,14 +2,12 @@ import { useEffect, useState } from 'react';
 import useMarvelService from '../../services/1_MarvelService/MarvelService';
 import './PageComicsDescription.scss';
 import { useParams, Link } from 'react-router-dom';
-import LoadingAnimation from '../0_General/LoadingAnimation/LoadingAnimation';
-import ErrorMessage from '../0_General/ErrorMessage/ErrorMessage';
-import Page404 from '../5_Page404/Page404';
 import { Helmet } from 'react-helmet';
+import setContent from '../../utils/setContents';
 
 const PageComicsDescription = () => {
   const { comicsId } = useParams();
-  const { loading, error, getOneComics, clearError } = useMarvelService();
+  const { getOneComics, clearError, process, setProcess } = useMarvelService();
   const [comics, setComics] = useState({});
 
   useEffect(() => {
@@ -18,7 +16,9 @@ const PageComicsDescription = () => {
   }, [comicsId]);
 
   const onLoadComics = () => {
-    getOneComics(comicsId).then(onComicsAllLoaded);
+    getOneComics(comicsId)
+    .then(onComicsAllLoaded)
+    .then(() => setProcess('confirmed'));
   };
 
   const onComicsAllLoaded = comics => {
@@ -53,15 +53,11 @@ const PageComicsDescription = () => {
     );
   };
 
-  const hasLoading = loading ? <LoadingAnimation /> : null;
-  const hasError = error ? <Page404 /> : null;
-  const displyContent = !(hasLoading || hasError) ? <ComicsPage /> : null;
+
 
   return (
     <>
-      {hasLoading}
-      {hasError}
-      {displyContent}
+      {setContent(process, ComicsPage)}
     </>
   );
 };

@@ -1,25 +1,20 @@
-import useHttp from '../../hooks/http.hook.js'
-
+import useHttp from '../../hooks/http.hook.js';
 
 const useMarvelService = () => {
+  const { request, clearError, process, setProcess } = useHttp();
 
-  const {loading, request, error, clearError} = useHttp()
-
-    const __apiBase = 'https://gateway.marvel.com:443/v1/public/';
-    const __apiKey = 'apikey=22c95a59120e95d258164f006e3b8fd6';
-
+  const __apiBase = 'https://gateway.marvel.com:443/v1/public/';
+  const __apiKey = 'apikey=22c95a59120e95d258164f006e3b8fd6';
 
   const getOneCharacter = async id => {
     const getRes = await request(`${__apiBase}characters/${id}?${__apiKey}`);
     return _transformOneCharacter(getRes.data.results[0]);
   };
 
-
-  const getAllCharacters = async (offset) => {
+  const getAllCharacters = async offset => {
     const getResAll = await request(`${__apiBase}characters?limit=9&offset=${offset}&${__apiKey}`);
     return getResAll.data.results.map(_transformOneCharacter);
   };
-
 
   const _transformOneCharacter = char => {
     let displayDescription = char.description == '' ? '!!! Unfortunately, this character does not have a description.' : char.description;
@@ -44,13 +39,10 @@ const useMarvelService = () => {
     return _transformOneComics(getRes.data.results[0]);
   };
 
-
-
-  const getAllComics = async (offset) => {
+  const getAllComics = async offset => {
     const getResAll = await request(`${__apiBase}comics?limit=8&offset=${offset}&${__apiKey}`);
     return getResAll.data.results.map(_transformOneComics);
   };
-
 
   const _transformOneComics = comics => {
     let displayDescription = comics.description == '' ? '!!! Unfortunately, this character does not have a description.' : comics.description;
@@ -69,36 +61,26 @@ const useMarvelService = () => {
   /*---------------------------------------------------------------------------------------------------------------- */
   /*---------------------------------------------------------------------------------------------------------------- */
 
-
-
   const getOneCharacterByName = async nameChar => {
     const getRes = await request(`${__apiBase}characters?name=${nameChar}&${__apiKey}`);
-    
+
     if (getRes.data.results.length >= 1) {
       return _transformOneCharacter(getRes.data.results[0]);
     } else {
-      return false
+      return false;
     }
   };
 
-
-
-
-
-
-
-
-
   return {
-    loading, 
-    error, 
-    clearError, 
-    getOneCharacter, 
-    getAllCharacters, 
-    getAllComics, 
-    getOneComics, 
+    clearError,
+    getOneCharacter,
+    getAllCharacters,
+    getAllComics,
+    getOneComics,
     getOneCharacterByName,
-  }
-}
+    process,
+    setProcess,
+  };
+};
 
 export default useMarvelService;

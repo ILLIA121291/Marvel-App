@@ -6,13 +6,32 @@ import LoadingAnimation from '../../0_General/LoadingAnimation/LoadingAnimation'
 import ErrorMessage from '../../0_General/ErrorMessage/ErrorMessage';
 import { Link } from 'react-router-dom';
 
+const setContent = (process, Component, newComicsLoading) => {
+  switch (process) {
+    case 'waiting':
+      return <LoadingAnimation />;
+      break;
+    case 'loading':
+      return newComicsLoading ? <Component /> : <LoadingAnimation />;
+      break;
+    case 'confirmed':
+      return <Component />;
+      break;
+    case 'error':
+      return <ErrorMessage />;
+      break;
+    default:
+      throw new Error('Unexpected process state');
+  }
+};
+
 const ComicsList = () => {
   const [comicsList, setComicsList] = useState([]);
   const [newComicsLoading, setNewComicsLoading] = useState(false);
   const [comicsEnded, setComicsEnded] = useState(false);
   const [offset, setOffset] = useState(Math.floor(Math.random() * (1 - 1546) + 1546));
 
-  const { loading, error, getAllComics } = useMarvelService();
+  const { getAllComics, process, setProcess } = useMarvelService();
 
   useEffect(() => {
     onLoadMore(offset, true);
@@ -20,7 +39,9 @@ const ComicsList = () => {
 
   const onLoadMore = (offset, initial) => {
     initial ? setNewComicsLoading(false) : setNewComicsLoading(true);
-    getAllComics(offset).then(onComicsAllLoaded);
+    getAllComics(offset)
+      .then(onComicsAllLoaded)
+      .then(() => setProcess('confirmed'));
   };
 
   const onComicsAllLoaded = newComicsList => {
@@ -33,25 +54,25 @@ const ComicsList = () => {
     setOffset(offset => offset + 8);
   };
 
-  const elementsList = comicsList.map(value => {
-    const { id, title, thumbnail, price } = value;
+  const elementsList = comicsList => {
+    return comicsList.map(value => {
+      const { id, title, thumbnail, price } = value;
 
-    return (
-      <div key={id} className="comics_list_card" tabIndex="0">
-        <Link to={`/comics/${id}`}>
-          <div>
-            <img src={thumbnail} alt="" />
-          </div>
-          <p>{title}</p>
-          <p>{price}$</p>
-        </Link>
-      </div>
-    );
-  });
+      return (
+        <div key={id} className="comics_list_card" tabIndex="0">
+          <Link to={`/comics/${id}`}>
+            <div>
+              <img src={thumbnail} alt="" />
+            </div>
+            <p>{title}</p>
+            <p>{price}$</p>
+          </Link>
+        </div>
+      );
+    });
+  };
 
-  const hasLoading = loading && !newComicsLoading ? <LoadingAnimation /> : null;
-  const hasError = error ? <ErrorMessage /> : null;
-  const displyContent = !(hasLoading || hasError) ? elementsList : null;
+
 
   const addButton = comicsEnded ? (
     <p>Comics are over</p>
@@ -68,11 +89,7 @@ const ComicsList = () => {
 
   return (
     <section>
-      <div className="comics_main_comics_list">
-        {hasLoading}
-        {hasError}
-        {displyContent}
-      </div>
+      <div className="comics_main_comics_list">{setContent(process, () => elementsList(comicsList), newComicsLoading)}</div>
       <div className="comics_main_comics_list_add">{addButton}</div>
     </section>
   );

@@ -9,8 +9,7 @@ import PageCharacterDescription from '../7_PageCharacterDescription/PageCharacte
 const Page404 = lazy(() => import('../5_Page404/Page404'));
 const MainPage = lazy(() => import('../3_MainPage/3.0_MainPage/MainPage'));
 const PageComics = lazy(() => import('../4_PageComics/PageComics'));
-const  PageComicsDescription = lazy(() => import('../6_PageComicsDescription/PageComicsDescription'));
-
+const PageComicsDescription = lazy(() => import('../6_PageComicsDescription/PageComicsDescription'));
 
 const App = () => {
   return (
@@ -18,10 +17,10 @@ const App = () => {
       <div className="app">
         <AppHeader />
         <main>
-          <Suspense fallback={<LoadingAnimation/>}>
+          <Suspense fallback={<LoadingAnimation />}>
             <Routes>
-              <Route path="/" element={<MainPage/>} />
-              <Route path="/:nameChar" element={<PageCharacterDescription/>} />
+              <Route path="/" element={<MainPage />} />
+              <Route path="/character/:nameChar" element={<PageCharacterDescription />} />
               <Route path="/comics" element={<PageComics />} />
               <Route path="/comics/:comicsId" element={<PageComicsDescription />} />
               <Route path="*" element={<Page404 />} />

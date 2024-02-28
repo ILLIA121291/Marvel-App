@@ -5,27 +5,45 @@ import useMarvelService from '../../../services/1_MarvelService/MarvelService';
 import LoadingAnimation from '../../0_General/LoadingAnimation/LoadingAnimation';
 import ErrorMessage from '../../0_General/ErrorMessage/ErrorMessage';
 
+const setContent = (process, Component, newCharLoading) => {
+  switch (process) {
+    case 'waiting':
+      return <LoadingAnimation />;
+      break;
+    case 'loading':
+      return newCharLoading ? <Component /> : <LoadingAnimation />;
+      break;
+    case 'confirmed':
+      return <Component />;
+      break;
+    case 'error':
+      return <ErrorMessage />;
+      break;
+    default:
+      throw new Error('Unexpected process state');
+  }
+};
+
 const CharacterList = props => {
   const [charList, setCharList] = useState([]);
   const [newCharLoading, setNewCharLoading] = useState(false);
   const [charEnded, setCharEnded] = useState(false);
   const [offset, setOffset] = useState(Math.floor(Math.random() * (1 - 1546) + 1546));
 
-  const {loading, error, getAllCharacters} = useMarvelService();
+  const { getAllCharacters, process, setProcess } = useMarvelService();
 
   useEffect(() => {
     onLoadMore(offset, true);
   }, []);
 
   const onLoadMore = (offset, initial) => {
-    initial ? setNewCharLoading(false) : setNewCharLoading(true) 
+    initial ? setNewCharLoading(false) : setNewCharLoading(true);
     getAllCharacters(offset)
-    .then(onCharAllLoaded)
+      .then(onCharAllLoaded)
+      .then(() => setProcess('confirmed'));
   };
 
-
   const onCharAllLoaded = newCharList => {
-
     if (newCharList.length < 9) {
       setCharEnded(charEnded => true);
     }
@@ -35,28 +53,26 @@ const CharacterList = props => {
     setOffset(offset => offset + 9);
   };
 
-
   const onEnterPush = (e, id) => {
     if (e.code == 'Enter' || e.code == 'NumpadEnter') {
       props.onCharSelected(id);
     }
-    return
+    return;
   };
 
-  const elementsList = charList.map(value => {
-    return (
-      <div key={value.id} className="character_list_item" onClick={() => props.onCharSelected(value.id)} tabIndex="0" onKeyDown={e => onEnterPush(e, value.id)}>
-        <div className="character_list_item_container_img">
-          <img src={value.thumbnail} alt={value.name} />
+  const elementsList = charList => {
+    return charList.map(value => {
+      return (
+        <div key={value.id} className="character_list_item" onClick={() => props.onCharSelected(value.id)} tabIndex="0" onKeyDown={e => onEnterPush(e, value.id)}>
+          <div className="character_list_item_container_img">
+            <img src={value.thumbnail} alt={value.name} />
+          </div>
+          <p>{value.name}</p>
         </div>
-        <p>{value.name}</p>
-      </div>
-    );
-  });
+      );
+    });
+  };
 
-  const hasLoading = loading && !newCharLoading ? <LoadingAnimation /> : null;
-  const hasError = error ? <ErrorMessage /> : null;
-  const displyContent = !(hasLoading || hasError) ? elementsList : null;
   const addButton = charEnded ? (
     <p>Characters are over</p>
   ) : (
@@ -70,15 +86,9 @@ const CharacterList = props => {
     />
   );
 
-
-
   return (
-    <section className="character_list" >
-      <div className="character_list_list">
-        {hasLoading}
-        {hasError}
-        {displyContent}
-      </div>
+    <section className="character_list">
+      <div className="character_list_list">{setContent(process, () => elementsList(charList), newCharLoading)}</div>
       <div className="character_list_add">{addButton}</div>
     </section>
   );

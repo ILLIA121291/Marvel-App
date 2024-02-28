@@ -1,14 +1,14 @@
 import useMarvelService from '../../services/1_MarvelService/MarvelService';
 import './PageCharacterDescription.scss';
 import { useState, useEffect } from 'react';
-import LoadingAnimation from '../0_General/LoadingAnimation/LoadingAnimation';
-import Page404 from '../5_Page404/Page404';
+
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import setContent from '../../utils/setContents';
 
 const PageCharacterDescription = () => {
   const { nameChar } = useParams();
-  const { loading, error, getOneCharacterByName, clearError } = useMarvelService();
+  const { getOneCharacterByName, clearError, process, setProcess } = useMarvelService();
   const [char, setChar] = useState({});
 
   useEffect(() => {
@@ -17,10 +17,12 @@ const PageCharacterDescription = () => {
   }, [nameChar]);
 
   const onLoadchar = () => {
-    getOneCharacterByName(nameChar).then(oncharAllLoaded);
+    getOneCharacterByName(nameChar)
+    .then(onCharAllLoaded)
+    .then(() => setProcess('confirmed'));
   };
 
-  const oncharAllLoaded = char => {
+  const onCharAllLoaded = char => {
     setChar(char);
   };
 
@@ -46,15 +48,10 @@ const PageCharacterDescription = () => {
     );
   };
 
-  const hasLoading = loading ? <LoadingAnimation /> : null;
-  const hasError = error ? <Page404 /> : null;
-  const displyContent = !(hasLoading || hasError) ? <CharPage /> : null;
 
   return (
     <>
-      {hasLoading}
-      {hasError}
-      {displyContent}
+      {setContent(process, CharPage)}
     </>
   );
 };
