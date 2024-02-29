@@ -1,15 +1,17 @@
 import './App.scss';
-import AppHeader from '../2_AppHeader/AappHeader';
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 
+import AppHeader from '../2_AppHeader/AppHeader';
 import LoadingAnimation from '../0_General/LoadingAnimation/LoadingAnimation';
-import PageCharacterDescription from '../7_PageCharacterDescription/PageCharacterDescription';
 
 const Page404 = lazy(() => import('../5_Page404/Page404'));
 const MainPage = lazy(() => import('../3_MainPage/3.0_MainPage/MainPage'));
-const PageComics = lazy(() => import('../4_PageComics/PageComics'));
+const PageComics = lazy(() => import('../4_PageComics/4.0_PageComics/PageComics'));
 const PageComicsDescription = lazy(() => import('../6_PageComicsDescription/PageComicsDescription'));
+const PageCharacterDescription = lazy(() => import('../7_PageCharacterDescription/PageCharacterDescription'));
+
 
 const App = () => {
   return (

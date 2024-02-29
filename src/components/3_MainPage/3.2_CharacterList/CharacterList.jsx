@@ -1,7 +1,10 @@
 import './CharacterList.scss';
-import Button from '../../0_General/Button/Button';
-import { useState, useEffect, useRef } from 'react';
+
+import { useState, useEffect, useMemo } from 'react';
+
 import useMarvelService from '../../../services/1_MarvelService/MarvelService';
+
+import Button from '../../0_General/Button/Button';
 import LoadingAnimation from '../../0_General/LoadingAnimation/LoadingAnimation';
 import ErrorMessage from '../../0_General/ErrorMessage/ErrorMessage';
 
@@ -9,16 +12,12 @@ const setContent = (process, Component, newCharLoading) => {
   switch (process) {
     case 'waiting':
       return <LoadingAnimation />;
-      break;
     case 'loading':
       return newCharLoading ? <Component /> : <LoadingAnimation />;
-      break;
     case 'confirmed':
       return <Component />;
-      break;
     case 'error':
       return <ErrorMessage />;
-      break;
     default:
       throw new Error('Unexpected process state');
   }
@@ -38,6 +37,7 @@ const CharacterList = props => {
 
   const onLoadMore = (offset, initial) => {
     initial ? setNewCharLoading(false) : setNewCharLoading(true);
+
     getAllCharacters(offset)
       .then(onCharAllLoaded)
       .then(() => setProcess('confirmed'));
@@ -73,6 +73,10 @@ const CharacterList = props => {
     });
   };
 
+  const elementsListMemo = useMemo(() => {
+    return setContent(process, () => elementsList(charList), newCharLoading);
+  }, [process]);
+
   const addButton = charEnded ? (
     <p>Characters are over</p>
   ) : (
@@ -88,7 +92,7 @@ const CharacterList = props => {
 
   return (
     <section className="character_list">
-      <div className="character_list_list">{setContent(process, () => elementsList(charList), newCharLoading)}</div>
+      <div className="character_list_list">{elementsListMemo}</div>
       <div className="character_list_add">{addButton}</div>
     </section>
   );

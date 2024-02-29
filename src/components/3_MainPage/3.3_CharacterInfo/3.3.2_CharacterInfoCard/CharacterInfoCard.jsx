@@ -7,10 +7,7 @@ const CharacterInfoCard = ({ data }) => {
 
   if (comics.length == 0) {
     comicsDisplay = (
-      <li 
-      key={1} 
-      className="character_info_card_comics_list_li"
-      style={{fontWeight: 900, textDecoration: 'underline',}}>
+      <li key={1} className="character_info_card_comics_list_li" style={{ fontWeight: 900, textDecoration: 'underline' }}>
         !!! Unfortunately, there is no information about the comics for this character.
       </li>
     );
@@ -33,10 +30,10 @@ const CharacterInfoCard = ({ data }) => {
         <div>
           <h3>{name}</h3>
           <div>
-            <a href={homepage} className="btn-clas btn-red" target='_blank'>
+            <a href={homepage} className="btn-clas btn-red" target="_blank">
               HOMEPAGE
             </a>
-            <a href={wiki} className="btn-clas btn-grey" target='_blank'>
+            <a href={wiki} className="btn-clas btn-grey" target="_blank">
               WIKI
             </a>
           </div>

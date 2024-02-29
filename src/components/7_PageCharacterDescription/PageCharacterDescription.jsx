@@ -1,9 +1,10 @@
-import useMarvelService from '../../services/1_MarvelService/MarvelService';
 import './PageCharacterDescription.scss';
-import { useState, useEffect } from 'react';
 
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+
+import useMarvelService from '../../services/1_MarvelService/MarvelService';
 import setContent from '../../utils/setContents';
 
 const PageCharacterDescription = () => {
@@ -18,8 +19,8 @@ const PageCharacterDescription = () => {
 
   const onLoadchar = () => {
     getOneCharacterByName(nameChar)
-    .then(onCharAllLoaded)
-    .then(() => setProcess('confirmed'));
+      .then(onCharAllLoaded)
+      .then(() => setProcess('confirmed'));
   };
 
   const onCharAllLoaded = char => {
@@ -48,12 +49,7 @@ const PageCharacterDescription = () => {
     );
   };
 
-
-  return (
-    <>
-      {setContent(process, CharPage)}
-    </>
-  );
+  return <>{setContent(process, CharPage)}</>;
 };
 
 export default PageCharacterDescription;

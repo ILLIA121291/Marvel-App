@@ -1,25 +1,23 @@
-import Button from '../../0_General/Button/Button';
 import './ComicsList.scss';
+
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import useMarvelService from '../../../services/1_MarvelService/MarvelService';
+
+import Button from '../../0_General/Button/Button';
 import LoadingAnimation from '../../0_General/LoadingAnimation/LoadingAnimation';
 import ErrorMessage from '../../0_General/ErrorMessage/ErrorMessage';
-import { Link } from 'react-router-dom';
 
 const setContent = (process, Component, newComicsLoading) => {
   switch (process) {
     case 'waiting':
       return <LoadingAnimation />;
-      break;
     case 'loading':
       return newComicsLoading ? <Component /> : <LoadingAnimation />;
-      break;
     case 'confirmed':
       return <Component />;
-      break;
     case 'error':
       return <ErrorMessage />;
-      break;
     default:
       throw new Error('Unexpected process state');
   }
@@ -71,8 +69,6 @@ const ComicsList = () => {
       );
     });
   };
-
-
 
   const addButton = comicsEnded ? (
     <p>Comics are over</p>

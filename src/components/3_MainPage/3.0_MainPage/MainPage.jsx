@@ -1,10 +1,13 @@
 import './MainPage.scss';
+
+import { useState } from 'react';
+import { Helmet } from 'react-helmet';
+
+import ErrorBoundary from '../../0_General/ErrorBoundary/ErrorBoundary';
+
 import CharacterTopPanel from '../3.1_CharacterTopPanel/CharacterTopPanel';
 import CharacterList from '../3.2_CharacterList/CharacterList';
 import CharacterInfo from '../3.3_CharacterInfo/3.3.0_CharacterInfo/CharacterInfo';
-import { useState } from 'react';
-import ErrorBoundary from '../../0_General/ErrorBoundary/ErrorBoundary';
-import { Helmet } from 'react-helmet';
 
 const MainPage = () => {
   const [selectChar, setChar] = useState(null);

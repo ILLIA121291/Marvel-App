@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
 import './CharacterTopPanel.scss';
 
-import Button from '../../0_General/Button/Button';
+import { useState, useEffect, useMemo } from 'react';
+
 import useMarvelService from '../../../services/1_MarvelService/MarvelService';
 import setContent from '../../../utils/setContents';
 
-
+import Button from '../../0_General/Button/Button';
 
 const CharacterTopPanel = () => {
   const [char, setChar] = useState({});
@@ -16,12 +16,16 @@ const CharacterTopPanel = () => {
   }, []);
 
   const updataChar = () => {
-    clearError()
+    clearError();
     const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
     getOneCharacter(id)
-    .then(onCharLoaded)
-    .then(() => setProcess('confirmed'));
+      .then(onCharLoaded)
+      .then(() => setProcess('confirmed'));
   };
+
+  const setContentMemo = useMemo(() => {
+    return setContent(process, RandomCharacter, char, 'Please click on the "TRY IT" button one more time for fix it!');
+  }, [process]);
 
   const onCharLoaded = char => {
     setChar(char);
@@ -31,12 +35,9 @@ const CharacterTopPanel = () => {
     updataChar();
   };
 
-
   return (
     <section className="character_top_panel">
-      <div className="character_top_panel_character">
-        {setContent(process, RandomCharacter, char)}
-      </div>
+      <div className="character_top_panel_character">{setContentMemo}</div>
       <div className="character_top_panel_random">
         <img src="/CharacterTopPanel/mjolnir.svg" alt="mjolnir" className="character_top_panel_random_mjolnir" />
         <img src="/CharacterTopPanel/shield.svg" alt="shield" className="character_top_panel_random_shield" />
@@ -69,10 +70,10 @@ const RandomCharacter = props => {
         <h2>{name}</h2>
         <p>{displayDescrip}</p>
         <div className="character_btn">
-          <a href={homepage} className="btn-red btn-clas" style={{'color' : 'white'}} target="_blank">
+          <a href={homepage} className="btn-red btn-clas" style={{ color: 'white' }} target="_blank">
             HOMEPAGE
           </a>
-          <a href={wiki} className="btn-grey btn-clas" style={{'color' : 'white'}} target="_blank">
+          <a href={wiki} className="btn-grey btn-clas" style={{ color: 'white' }} target="_blank">
             WIKI
           </a>
         </div>

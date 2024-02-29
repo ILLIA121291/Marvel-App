@@ -1,4 +1,5 @@
 import './Page404.scss';
+
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 

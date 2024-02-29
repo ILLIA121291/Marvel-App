@@ -1,6 +1,8 @@
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import './ErrorBoundary.scss'
+
 import { Component } from "react";
+
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 class ErrorBoundary extends Component {
     state = {

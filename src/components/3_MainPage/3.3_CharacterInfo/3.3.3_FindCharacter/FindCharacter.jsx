@@ -1,9 +1,10 @@
 import './FindCharacter.scss';
+
+import useMarvelService from '../../../../services/1_MarvelService/MarvelService';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useEffect, useState } from 'react';
-import useMarvelService from '../../../../services/1_MarvelService/MarvelService';
-import { Link } from 'react-router-dom';
 
 const FindCharacter = () => {
   const { getOneCharacterByName, clearError } = useMarvelService();

@@ -1,5 +1,7 @@
 import './CharacterInfo.scss';
+
 import { useState, useEffect } from 'react';
+
 import useMarvelService from '../../../../services/1_MarvelService/MarvelService';
 import PropTypes from 'prop-types';
 import setContent from '../../../../utils/setContents.jsx';
@@ -25,16 +27,13 @@ const CharacterInfo = props => {
 
     clearError();
     getOneCharacter(charId)
-    .then(onCharLoaded)
-    .then(() => setProcess('confirmed'))
+      .then(onCharLoaded)
+      .then(() => setProcess('confirmed'));
   };
 
   const onCharLoaded = char => {
     setChar(char);
   };
-
-
-
 
   return (
     <section className="contaner_character_info">

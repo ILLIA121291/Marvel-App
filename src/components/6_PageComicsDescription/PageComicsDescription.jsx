@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
-import useMarvelService from '../../services/1_MarvelService/MarvelService';
 import './PageComicsDescription.scss';
+
+import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+
+import useMarvelService from '../../services/1_MarvelService/MarvelService';
 import setContent from '../../utils/setContents';
 
 const PageComicsDescription = () => {
@@ -17,8 +19,8 @@ const PageComicsDescription = () => {
 
   const onLoadComics = () => {
     getOneComics(comicsId)
-    .then(onComicsAllLoaded)
-    .then(() => setProcess('confirmed'));
+      .then(onComicsAllLoaded)
+      .then(() => setProcess('confirmed'));
   };
 
   const onComicsAllLoaded = comics => {
@@ -53,13 +55,7 @@ const PageComicsDescription = () => {
     );
   };
 
-
-
-  return (
-    <>
-      {setContent(process, ComicsPage)}
-    </>
-  );
+  return <>{setContent(process, ComicsPage)}</>;
 };
 
 export default PageComicsDescription;
