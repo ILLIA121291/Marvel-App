@@ -4,7 +4,6 @@
   background-color: #fff;
   border-radius: 10px;
 
-
   &_image {
     display: flex;
     gap: 25px;
@@ -32,12 +31,11 @@
         a {
           display: block;
         }
-  
+
         a:last-child {
           margin-top: 10px;
         }
       }
-
     }
   }
 

@@ -1,6 +1,7 @@
 import './CharacterList.scss';
 
 import { useState, useEffect, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 
 import useMarvelService from '../../../services/1_MarvelService/MarvelService';
 
@@ -56,14 +57,23 @@ const CharacterList = props => {
   const onEnterPush = (e, id) => {
     if (e.code == 'Enter' || e.code == 'NumpadEnter') {
       props.onCharSelected(id);
+      console.log(window.innerWidth);
     }
     return;
   };
 
+
+
   const elementsList = charList => {
     return charList.map(value => {
       return (
-        <div key={value.id} className="character_list_item" onClick={() => props.onCharSelected(value.id)} tabIndex="0" onKeyDown={e => onEnterPush(e, value.id)}>
+        <div
+          key={value.id}
+          tabIndex="0"
+          className="character_list_item"
+          onClick={() => (props.onCharSelected(value.id), props.setStateMobiCharInfo(true))}
+          onKeyDown={e => onEnterPush(e, value.id)}
+        >
           <div className="character_list_item_container_img">
             <img src={value.thumbnail} alt={value.name} />
           </div>

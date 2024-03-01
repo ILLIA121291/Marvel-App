@@ -17,12 +17,15 @@ const useMarvelService = () => {
   };
 
   const _transformOneCharacter = char => {
-    let displayDescription = char.description == '' ? '!!! Unfortunately, this character does not have a description.' : char.description;
+    
+    if(!char.description) {
+      char.description = 'Unfortunately, this character does not have a description.'
+    }
 
     return {
       id: char.id,
       name: char.name,
-      description: displayDescription,
+      description: char.description,
       thumbnail: char.thumbnail.path + '.' + char.thumbnail.extension,
       homepage: char.urls[0].url,
       wiki: char.urls[1].url,

@@ -7,41 +7,40 @@
   background-color: #fff;
   border-radius: 10px;
 
-  label {
-    font-weight: 700;
-    font-size: 18px;
-    color: #000;
-  }
+  &_form {
+    &_label {
+      font-weight: 700;
+      font-size: 18px;
+      color: #000;
+    }
 
-  input {
-    width: 250px;
-    height: 38px;
-    font-size: 19px;
-    margin-right: 24px;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-    background: #fff;
-    margin-top: 19px;
-  }
+    &_input {
+      width: 250px;
+      height: 38px;
+      font-size: 19px;
+      margin-right: 24px;
+      margin-top: 19px;
+      box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+      background: #fff;
+    }
 
-  input::placeholder {
-    font-weight: 400;
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.5);
-    padding-left: 10px;
-    border-radius: 10px;
+    &_input::placeholder {
+      font-weight: 400;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.5);
+      padding-left: 10px;
+      border-radius: 10px;
+    }
   }
 }
 
-
-
 .message_block {
-  
   display: block;
   font-weight: 700;
   font-size: 18px;
 }
 
-.error_message { 
+.error_message {
   color: #9f0013;
   margin-top: 30px;
 }
@@ -52,9 +51,50 @@
   width: 250px;
 }
 
-
 .char_was_find {
   margin-top: 15px;
   display: flex;
   align-items: center;
+}
+
+@media (max-width: 500px) {
+  .find_character {
+    width: 360px;
+
+    &_form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &_input {
+        margin: 0px;
+        margin-top: 15px;
+      }
+
+      &_btn {
+        margin-top: 15px;
+      }
+    }
+  }
+
+  .char_was_find {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &_p {
+      margin: 0px;
+      text-align: center;
+    }
+
+    &_a {
+      margin-top: 15px;
+    }
+  }
+
+  .char_was_not_find {
+    &_p {
+      text-align: center;
+    }
+  }
 }

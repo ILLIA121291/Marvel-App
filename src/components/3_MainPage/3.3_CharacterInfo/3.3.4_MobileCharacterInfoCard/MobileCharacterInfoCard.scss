@@ -1,0 +1,41 @@
+.mobile_character_info_card {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .mobile_character_info_card {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    height: 300px;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    width: 100vw;
+    min-height: 100vh;
+
+    transition: transform 0.3s;
+
+    &_close_btn {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      &_btn {
+        font-size: 50px;
+        background: inherit;
+        margin-right: 30px;
+      }
+    }
+
+    &_open {
+      transform: translateX(0%);
+    }
+
+    &_close {
+      transform: translateX(150%);
+    }
+  }
+}

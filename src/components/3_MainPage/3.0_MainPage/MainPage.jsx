@@ -8,9 +8,11 @@ import ErrorBoundary from '../../0_General/ErrorBoundary/ErrorBoundary';
 import CharacterTopPanel from '../3.1_CharacterTopPanel/CharacterTopPanel';
 import CharacterList from '../3.2_CharacterList/CharacterList';
 import CharacterInfo from '../3.3_CharacterInfo/3.3.0_CharacterInfo/CharacterInfo';
+import MobileCharacterInfoCard from '../3.3_CharacterInfo/3.3.4_MobileCharacterInfoCard/MobileCharacterInfoCard';
 
 const MainPage = () => {
   const [selectChar, setChar] = useState(null);
+  const [stateMobiCharInfo, setStateMobiCharInfo] = useState(false);
 
   const onCharSelected = id => {
     setChar(id);
@@ -28,12 +30,17 @@ const MainPage = () => {
         </ErrorBoundary>
         <div className="character_main">
           <ErrorBoundary>
-            <CharacterList onCharSelected={onCharSelected} />
+            <CharacterList onCharSelected={onCharSelected} setStateMobiCharInfo={setStateMobiCharInfo} />
           </ErrorBoundary>
           <ErrorBoundary>
             <CharacterInfo charId={selectChar} />
           </ErrorBoundary>
         </div>
+        <MobileCharacterInfoCard
+          charId={selectChar}
+          stateMobiCharInfo={stateMobiCharInfo}
+          setStateMobiCharInfo={setStateMobiCharInfo}
+        />
       </section>
     </>
   );

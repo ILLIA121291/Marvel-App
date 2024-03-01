@@ -51,11 +51,12 @@ const FindCharacter = () => {
           setNameChar(nameChar => values.nameChar), setChar(null), setCharNotFind(false);
         }}
       >
-        <Form>
-          <label htmlFor="nameChar">Or find a character by name:</label>
-          <br />
-          <Field placeholder="Enter name" name="nameChar" type="text" />
-          <button className="btn-clas btn-red" disabled={disabeleSeaBtn} type="submit">
+        <Form className="find_character_form">
+          <label htmlFor="nameChar" className="find_character_form_label">
+            Or find a character by name:
+          </label>
+          <Field placeholder="Enter name" name="nameChar" type="text" className="find_character_form_input" />
+          <button className="btn-clas btn-red find_character_form_btn" disabled={disabeleSeaBtn} type="submit">
             FIND
           </button>
           <ErrorMessage className="message_block error_message" name="nameChar" component="p" />
@@ -70,8 +71,8 @@ const FindCharacter = () => {
 const CharWasFind = ({ nameChar }) => {
   return (
     <div className="char_was_find">
-      <p className="message_block successful_message">There is! Visit {nameChar} page?</p>
-      <Link to={`/character/${nameChar}`} className="btn-clas btn-grey" type="button">
+      <p className="message_block successful_message char_was_find_p">There is! Visit {nameChar} page?</p>
+      <Link to={`/character/${nameChar}`} className="btn-clas btn-grey char_was_find_a" type="button">
         TO PAGE
       </Link>
     </div>
@@ -79,7 +80,7 @@ const CharWasFind = ({ nameChar }) => {
 };
 
 const CharWasNotFind = () => {
-  return <p className="message_block error_message">The character was not found. Check the name and try again</p>;
+  return <p className="message_block error_message char_was_not_find_p">The character was not found. Check the name and try again</p>;
 };
 
 export default FindCharacter;

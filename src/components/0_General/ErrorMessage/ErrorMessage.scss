@@ -1,4 +1,4 @@
-.error-message {
+.component_error_message {
 
   width: 100%;
   height: 100%;
@@ -11,7 +11,8 @@
 
   font-weight: 900;
 
-  p {
+  &_p {
     padding-top: 10px;
+    text-align: center;
   }
 }

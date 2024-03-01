@@ -4,10 +4,8 @@
   "jsxSingleQuote": false,
   "bracketSpacing": true,
   "trailingComma": "all",
-  "printWidth": 500,
+  "printWidth": 130,
   "tabWidth": 2,
   "arrowParens": "avoid",
   "endOfLine": "lf"
 }
-
-

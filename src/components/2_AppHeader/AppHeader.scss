@@ -1,57 +1,59 @@
 @import '../0_General/variables.scss';
 
 .app {
-    &__header {
-        max-width: $max-width;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        margin: 20px auto 30px;
-        padding: 0px 15px;
-    }
+  &__header {
+    max-width: $max-width;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto 30px;
+    padding: 0px 15px;
+  }
 
-    h1 {
+  h1 {
+    a {
+      display: inline-block;
+      transition: transform 0.3s;
+    }
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 37px;
+    display: block;
+    span {
+      color: $main-color;
+    }
+  }
+  &__menu {
+    ul {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 32px;
+      li {
+        margin: 0 8px;
         a {
-        display: inline-block;
-        transition: transform .3s;
-    }
-    }
-
-    &__title {
-        font-weight: bold;
-        font-size: 28px;
-        line-height: 37px;
-        display: block;
-        span {
-            color: $main-color;
+          transition: transform 0.3s, color 0.3s;
+          display: inline-block;
         }
+      }
     }
-    &__menu {
-        ul {
-            display: flex;
-            justify-content: space-between;
-            font-weight: bold;
-            font-size: 24px;
-            line-height: 32px;
-            li {
-                margin: 0 8px;
-                a {
-                    transition: transform .3s, color .3s;
-                    display: inline-block       ;
-                }
-            }   
-        }
-    }
+  }
 }
 
-
 .nav-activated {
-color:$main-color;
+  color: $main-color;
 }
 
 @media (max-width: 600px) {
-    .app__header {
-        flex-direction: column;
-        align-items: center;
-    }
+  .app__header {
+    flex-direction: column;
+    align-items: center;
+  }
+  .app__menu {
+    margin-top: 10px;
+  }
 }

@@ -20,9 +20,9 @@ a{color:inherit;}
 
 
 
-/* :focus{
+:focus{
   transform: translateY(-10px);
-} */
+}
 
 /* * {
   outline: 1px solid #fa0202;

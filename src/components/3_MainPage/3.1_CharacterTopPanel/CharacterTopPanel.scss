@@ -7,20 +7,16 @@
   margin: 0px auto;
   box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.25);
 
-
   &_character {
     flex-shrink: 0;
     flex-basis: 550px;
     padding: 20px;
-
 
     display: flex;
     align-items: center;
     gap: 30px;
 
     border-radius: 10px;
-
-
 
     &_image {
       width: 180px;
@@ -63,7 +59,6 @@
 
     position: relative;
 
-
     &_mjolnir {
       position: absolute;
       top: 40px;
@@ -92,12 +87,14 @@
       }
     }
   }
+
+  &_find {
+    display: none;
+  }
 }
 
-
-@media (max-width:1200px) {
-  .character_top_panel{
-
+@media (max-width: 1200px) {
+  .character_top_panel {
     &_random_mjolnir {
       top: 55px;
       right: 0px;
@@ -108,15 +105,13 @@
       right: 120px;
     }
   }
-  
 }
-
 
 @media (max-width: 1100px) {
   .character_top_panel {
     flex-direction: column;
     box-shadow: initial;
-    
+
     &_character {
       flex-basis: initial;
       flex-grow: initial;
@@ -128,7 +123,6 @@
       box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.25);
     }
 
-
     &_random {
       flex-basis: initial;
       flex-grow: initial;
@@ -139,20 +133,23 @@
         right: 0px;
       }
     }
+
+    &_find {
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 
-@media(max-width:600px) {
-  .character_top_panel  {
-
+@media (max-width: 600px) {
+  .character_top_panel {
     &_character {
       flex-direction: column;
       gap: 15px;
       height: 410px;
 
       &_description {
-
-        h2{
+        h2 {
           text-align: center;
         }
 
@@ -161,7 +158,6 @@
         }
       }
     }
-
 
     &_random {
       padding: 15px;
@@ -174,12 +170,12 @@
         display: none;
       }
 
-      &_text_block{
+      &_text_block {
         display: flex;
         flex-direction: column;
-        align-items:center;
+        align-items: center;
 
-        p:nth-child(3){
+        p:nth-child(3) {
           margin: 0px;
           margin-bottom: 15px;
         }
@@ -193,7 +189,7 @@
 }
 
 @media (max-width: 500px) {
-  .character_top_panel_random_text_block > p{
+  .character_top_panel_random_text_block > p {
     font-size: 20px;
   }
 }

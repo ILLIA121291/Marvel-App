@@ -28,13 +28,18 @@
   }
 }
 
-@media (max-width:700px){
-  .contaner_character_info_background_img {
-    display: none;
-  }
 
+@media (max-width:1100px){
 
   .contaner_character_info {
     display: none;
+
+    &_find{
+      display: none;
+    }
+
+    &_background_img {
+      display: none;
+    }
   }
 }

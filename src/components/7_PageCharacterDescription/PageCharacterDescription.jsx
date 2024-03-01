@@ -1,11 +1,13 @@
 import './PageCharacterDescription.scss';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import useMarvelService from '../../services/1_MarvelService/MarvelService';
 import setContent from '../../utils/setContents';
+
+import { Link } from 'react-router-dom';
 
 const PageCharacterDescription = () => {
   const { nameChar } = useParams();
@@ -36,13 +38,19 @@ const PageCharacterDescription = () => {
           <meta name="description" content={`${name} description page`} />
           <title>{`${name} description page`}</title>
         </Helmet>
+
+        <header className='char_description_header'>
+          <Link to="/" className="char_description_header_link">
+            Back to all
+          </Link>
+        </header>
         <div className="char_description">
           <div className="char_description_img">
             <img src={thumbnail} alt={name} />
           </div>
           <div className="char_description_container">
-            <h2>{name}</h2>
-            <p className="char_description_text">{description}</p>
+            <h2 className="char_description_container_titel">{name}</h2>
+            <p className="char_description_container_text">{description}</p>
           </div>
         </div>
       </>

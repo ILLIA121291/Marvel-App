@@ -9,42 +9,27 @@ import setContent from '../../../../utils/setContents.jsx';
 import CharacterInfoCard from '../3.3.2_CharacterInfoCard/CharacterInfoCard';
 import FindCharacter from '../3.3.3_FindCharacter/FindCharacter';
 import ErrorBoundary from '../../../0_General/ErrorBoundary/ErrorBoundary';
+import getOneCharacterInfo from '../../../../utils/getOneCharacterInfo';
 
-const CharacterInfo = props => {
-  const [char, setChar] = useState(null);
-  const { getOneCharacter, clearError, process, setProcess } = useMarvelService();
+const CharacterInfo = (props) => {
 
-  useEffect(() => {
-    updateChar(props);
-  }, [props.charId]);
+  const {process, char} = getOneCharacterInfo(props)
 
-  const updateChar = props => {
-    const { charId } = props;
-
-    if (!charId) {
-      return;
-    }
-
-    clearError();
-    getOneCharacter(charId)
-      .then(onCharLoaded)
-      .then(() => setProcess('confirmed'));
-  };
-
-  const onCharLoaded = char => {
-    setChar(char);
-  };
-
+  
   return (
-    <section className="contaner_character_info">
+    <>
+    <section className="contaner_character_info" >
       <div className="character_info">
         {setContent(process, CharacterInfoCard, char)}
-        <ErrorBoundary>
-          <FindCharacter />
-        </ErrorBoundary>
+        <div className="character_info_find">
+          <ErrorBoundary>
+            <FindCharacter />
+          </ErrorBoundary>
+        </div>
       </div>
       <img src="/bg_asset.svg" alt="" className="contaner_character_info_background_img" />
     </section>
+    </>
   );
 };
 

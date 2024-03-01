@@ -6,6 +6,7 @@ import useMarvelService from '../../../services/1_MarvelService/MarvelService';
 import setContent from '../../../utils/setContents';
 
 import Button from '../../0_General/Button/Button';
+import FindCharacter from '../3.3_CharacterInfo/3.3.3_FindCharacter/FindCharacter';
 
 const CharacterTopPanel = () => {
   const [char, setChar] = useState({});
@@ -28,6 +29,10 @@ const CharacterTopPanel = () => {
   }, [process]);
 
   const onCharLoaded = char => {
+    if (char.description.length > 250) {
+      char.description = char.description.slice(0, 250) + '...';
+    }
+
     setChar(char);
   };
 
@@ -47,6 +52,9 @@ const CharacterTopPanel = () => {
           <p>Or choose another one</p>
           <Button titel="TRY IT" className="btn-red" onClick={onTryIt} />
         </div>
+      </div>
+      <div className="character_top_panel_find">
+        <FindCharacter />
       </div>
     </section>
   );
