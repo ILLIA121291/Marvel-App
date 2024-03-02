@@ -28,6 +28,7 @@ const getOneCharacterInfo = (props) => {
   };
 
 
+
   return {process, char}
 
 }

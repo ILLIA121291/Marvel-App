@@ -1,6 +1,6 @@
 import './ComicsList.scss';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import useMarvelService from '../../../services/1_MarvelService/MarvelService';
 
@@ -31,25 +31,30 @@ const ComicsList = () => {
 
   const { getAllComics, process, setProcess } = useMarvelService();
 
+  const qntComicsInList = useMemo(() => {
+    return window.innerWidth > 734 && window.innerWidth < 974 ? 9 : 8;
+  });
+
   useEffect(() => {
-    onLoadMore(offset, true);
+    onLoadMore(offset, qntComicsInList, true);
   }, []);
 
   const onLoadMore = (offset, initial) => {
     initial ? setNewComicsLoading(false) : setNewComicsLoading(true);
-    getAllComics(offset)
+
+    getAllComics(offset, qntComicsInList)
       .then(onComicsAllLoaded)
       .then(() => setProcess('confirmed'));
   };
 
   const onComicsAllLoaded = newComicsList => {
-    if (newComicsList.length < 7) {
+    if (newComicsList.length < qntComicsInList) {
       setComicsEnded(comicsEnded => true);
     }
 
     setComicsList(comicsList => [...comicsList, ...newComicsList]);
     setNewComicsLoading(newComicsLoading => false);
-    setOffset(offset => offset + 8);
+    setOffset(offset => offset + qntComicsInList);
   };
 
   const elementsList = comicsList => {
@@ -59,11 +64,11 @@ const ComicsList = () => {
       return (
         <div key={id} className="comics_list_card" tabIndex="0">
           <Link to={`/comics/${id}`}>
-            <div>
+            <div className="comics_list_card_img">
               <img src={thumbnail} alt="" />
             </div>
-            <p>{title}</p>
-            <p>{price}$</p>
+            <p className="comics_list_card_title">{title}</p>
+            <p className="comics_list_card_price">{price}$</p>
           </Link>
         </div>
       );

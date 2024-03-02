@@ -3,11 +3,10 @@ import './PageCharacterDescription.scss';
 import { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 
 import useMarvelService from '../../services/1_MarvelService/MarvelService';
 import setContent from '../../utils/setContents';
-
-import { Link } from 'react-router-dom';
 
 const PageCharacterDescription = () => {
   const { nameChar } = useParams();
@@ -29,9 +28,27 @@ const PageCharacterDescription = () => {
     setChar(char);
   };
 
-  const { name, description, thumbnail } = char;
+  const { name, description, thumbnail, comics } = char;
 
   const CharPage = () => {
+    let comicsDisplay = null;
+
+    if (comics.length == 0) {
+      comicsDisplay = (
+        <li key={1} className="character_info_card_comics_list_item" style={{ fontWeight: 900, color: 'red' }}>
+          Unfortunately, there is no data about the comics for this character!
+        </li>
+      );
+    } else {
+      comicsDisplay = comics.map((value, i) => {
+        return (
+          <li key={i} className="character_info_card_comics_list_item">
+            {value.name}
+          </li>
+        );
+      });
+    }
+
     return (
       <>
         <Helmet>
@@ -39,7 +56,7 @@ const PageCharacterDescription = () => {
           <title>{`${name} description page`}</title>
         </Helmet>
 
-        <header className='char_description_header'>
+        <header className="char_description_header">
           <Link to="/" className="char_description_header_link">
             Back to all
           </Link>
@@ -51,6 +68,7 @@ const PageCharacterDescription = () => {
           <div className="char_description_container">
             <h2 className="char_description_container_titel">{name}</h2>
             <p className="char_description_container_text">{description}</p>
+            <ul className="character_info_card_comics_list">{comicsDisplay}</ul>
           </div>
         </div>
       </>

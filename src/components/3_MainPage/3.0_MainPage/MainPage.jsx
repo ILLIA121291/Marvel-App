@@ -2,6 +2,7 @@ import './MainPage.scss';
 
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';
+import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 
 import ErrorBoundary from '../../0_General/ErrorBoundary/ErrorBoundary';
 
@@ -13,6 +14,10 @@ import MobileCharacterInfoCard from '../3.3_CharacterInfo/3.3.4_MobileCharacterI
 const MainPage = () => {
   const [selectChar, setChar] = useState(null);
   const [stateMobiCharInfo, setStateMobiCharInfo] = useState(false);
+
+  if (window.innerWidth < 1100) {
+    stateMobiCharInfo ? disablePageScroll() : enablePageScroll();
+  }
 
   const onCharSelected = id => {
     setChar(id);

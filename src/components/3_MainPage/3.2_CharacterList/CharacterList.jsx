@@ -1,7 +1,6 @@
 import './CharacterList.scss';
 
 import { useState, useEffect, useMemo } from 'react';
-import { Link } from 'react-router-dom';
 
 import useMarvelService from '../../../services/1_MarvelService/MarvelService';
 
@@ -32,26 +31,30 @@ const CharacterList = props => {
 
   const { getAllCharacters, process, setProcess } = useMarvelService();
 
+  const qntCharInList = useMemo(() => {
+    return window.innerWidth > 700 ? 9 : 10;
+  }, []);
+
   useEffect(() => {
-    onLoadMore(offset, true);
+    onLoadMore(offset, qntCharInList, true);
   }, []);
 
   const onLoadMore = (offset, initial) => {
     initial ? setNewCharLoading(false) : setNewCharLoading(true);
 
-    getAllCharacters(offset)
+    getAllCharacters(offset, qntCharInList)
       .then(onCharAllLoaded)
       .then(() => setProcess('confirmed'));
   };
 
   const onCharAllLoaded = newCharList => {
-    if (newCharList.length < 9) {
+    if (newCharList.length < qntCharInList) {
       setCharEnded(charEnded => true);
     }
 
     setCharList(charList => [...charList, ...newCharList]);
     setNewCharLoading(newCharLoading => false);
-    setOffset(offset => offset + 9);
+    setOffset(offset => offset + qntCharInList);
   };
 
   const onEnterPush = (e, id) => {
@@ -61,8 +64,6 @@ const CharacterList = props => {
     }
     return;
   };
-
-
 
   const elementsList = charList => {
     return charList.map(value => {

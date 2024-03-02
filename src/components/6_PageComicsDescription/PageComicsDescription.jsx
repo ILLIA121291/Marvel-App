@@ -36,19 +36,21 @@ const PageComicsDescription = () => {
           <meta name="description" content={`${title} comics book`} />
           <title>{`${title} comics book`}</title>
         </Helmet>
+        <div className="comics_description_link_container">
+          <Link className="comics_description_link_container_link" to="/comics">
+            Back to all
+          </Link>
+        </div>
         <div className="comics_description">
           <div className="comics_description_img">
             <img src={thumbnail} alt={title} />
           </div>
           <div className="comics_description_container">
-            <header className="comics_description_container_header">
-              <h2>{title}</h2>
-              <Link to="/comics">Back to all</Link>
-            </header>
-            <p className="comics_description_text">{description}</p>
-            <p>{`${page} pages`}</p>
-            <p>Language: en-us</p>
-            <p>{`$${price}`}</p>
+            <h2 className="comics_description_container_title">{title}</h2>
+            <p className="comics_description_container_text">{description}</p>
+            <p className="comics_description_container_page">{`${page} pages`}</p>
+            <p className="comics_description_container_languge">Language: en-us</p>
+            <p className="comics_description_container_price">{`$${price}`}</p>
           </div>
         </div>
       </>

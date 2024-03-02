@@ -5,10 +5,9 @@
   max-width: $max-width;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 60px 70px;
-
+  gap: 60px 15px;
 }
 
 .comics_main_comics_list_add {
@@ -21,11 +20,14 @@
   padding: 0px;
   width: 225px;
   min-height: 415px;
-  transition: transform .3s, box-shadow .1s;  
+  transition: transform 0.3s, box-shadow 0.1s;
 
-  div {
-    width: 220px;
+  &_img {
+    width: inherit;
     height: 346px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     img {
       width: 100%;
@@ -34,13 +36,14 @@
     }
   }
 
-  p:nth-child(2) {
+  &_title {
     margin-top: 10px;
     font-weight: 900;
     font-size: 18px;
   }
 
-  p:nth-child(3) {
+  &_price {
+    display: block;
     margin-top: 10px;
     font-weight: 700;
     font-size: 16px;
@@ -53,8 +56,14 @@
   box-shadow: 0 5px 20px 0 $main-color;
 }
 
-.comics_list_card:focus{
+.comics_list_card:focus {
   border: initial;
   transform: translateY(-10px);
   box-shadow: 0 5px 20px 0 $main-color;
+}
+
+@media (max-width: 740px) {
+  .comics_main_comics_list {
+    justify-content: center;
+  }
 }

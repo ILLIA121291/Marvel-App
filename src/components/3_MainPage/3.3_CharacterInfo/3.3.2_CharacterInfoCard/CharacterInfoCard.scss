@@ -4,20 +4,21 @@
   background-color: #fff;
   border-radius: 10px;
 
-  &_image {
+  &_header {
     display: flex;
     gap: 25px;
 
-    img {
+    &_img {
       width: 150px;
       height: 150px;
       object-fit: fill;
     }
 
-    div {
+    &_contaner {
       display: flex;
       flex-direction: column;
-      h3 {
+
+      &_name {
         display: block;
         width: 180px;
         flex-grow: 1;
@@ -26,8 +27,9 @@
         margin-top: 5px;
       }
 
-      div {
+      &_btns {
         max-width: 150px;
+
         a {
           display: block;
         }
@@ -39,14 +41,14 @@
     }
   }
 
-  &_text {
+  &_description {
     margin-top: 15px;
     font-weight: 400;
     font-size: 14px;
     color: #000;
   }
 
-  h4 {
+  &_titel_list {
     margin-top: 10px;
     font-weight: 700;
     font-size: 18px;
@@ -54,8 +56,9 @@
   }
 
   &_comics_list {
-    &_li {
+    &_item {
       margin-top: 20px;
+      padding: 5px;
       font-weight: 400;
       font-size: 16px;
       line-height: 150%;

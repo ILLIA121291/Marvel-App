@@ -1,6 +1,7 @@
 import './CharacterTopPanel.scss';
 
 import { useState, useEffect, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 
 import useMarvelService from '../../../services/1_MarvelService/MarvelService';
 import setContent from '../../../utils/setContents';
@@ -61,13 +62,15 @@ const CharacterTopPanel = () => {
 };
 
 const RandomCharacter = props => {
-  const { name, description, thumbnail, homepage, wiki } = props.data;
+  const { name, description, thumbnail, wiki } = props.data;
 
   let displayDescrip = description;
 
   if (description) {
-    description.length > 250 ? description.slice(0, 250) + '...' : description;
+    displayDescrip = description.length > 250 ? description.slice(0, 250) + '...' : description;
   }
+
+  let textColor = displayDescrip.indexOf('Unfortunately,') == 0 ? { color: 'red', fontWeight: 900 } : {};
 
   return (
     <>
@@ -76,11 +79,11 @@ const RandomCharacter = props => {
       </div>
       <div className="character_top_panel_character_description">
         <h2>{name}</h2>
-        <p>{displayDescrip}</p>
+        <p style={textColor}>{displayDescrip}</p>
         <div className="character_btn">
-          <a href={homepage} className="btn-red btn-clas" style={{ color: 'white' }} target="_blank">
+          <Link to={`/character/${name}`} className="btn-red btn-clas">
             HOMEPAGE
-          </a>
+          </Link>
           <a href={wiki} className="btn-grey btn-clas" style={{ color: 'white' }} target="_blank">
             WIKI
           </a>

@@ -2,7 +2,7 @@ import './ComicsHeader.scss';
 
 const ComicsHeader = () => {
   return (
-    <div className="comics_main_header">
+    <header className="comics_main_header">
       <div className="comics_main_header_container">
         <img src="/Comics/avengers.svg" alt="" />
         <div className="comics_main_header_text">
@@ -11,7 +11,7 @@ const ComicsHeader = () => {
         </div>
       </div>
       <img src="/Comics/avengers logo.svg" alt="" />
-    </div>
+    </header>
   );
 };
 
