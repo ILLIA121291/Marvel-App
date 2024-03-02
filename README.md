@@ -1,8 +1,29 @@
-# React + Vite
+Marvel information portal (single page application)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Demo link: https://marvel-app-drab.vercel.app/ 
 
-Currently, two official plugins are available:
+This application has a responsive design and can work on mobile devices and computers. Minimum screen width 400 pixels.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+This application consists of 5 js pages:
+
+1. Main page
+2. Comics page
+3. 404 page
+4. Character description page - (this page is created dynamically)
+5. Comics description page  - (this page is created dynamically)
+
+
+To create this application I used:
+
+- React 18.2.43
+- React-dom 18.2.17
+- React-router-dom 6.22.1
+- React-helmet 6.1.0
+- Formik 2.4.5
+- Yup 1.3.3
+- Scroll-lock 2.1.5
+
+
+Website that provides the API: https://developer.marvel.com/ 
+Rate limit: 3 000 calls per day 
